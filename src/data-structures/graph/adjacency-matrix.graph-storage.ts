@@ -1,4 +1,4 @@
-import { GraphStorage_Interface } from './graph-storage.inferface';
+import { GraphStorage_Interface } from '@root/data-structures';
 
 export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
   private vertices: number;
@@ -21,6 +21,28 @@ export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
     return this.vertices;
   }
 
+  setVertex(vertex: number): void {
+    if (vertex < 0) {
+      throw new Error('Negative vertex is not allowed');
+    }
+
+    const lastIndex = this.size() - 1;
+
+    if (lastIndex < vertex) {
+      for (let i = 0; i <= vertex; i++) {
+        if (i <= lastIndex) {
+          for (let j = lastIndex + 1; j <= vertex; j++) {
+            this.adjacencyMatrix[i][j] = Infinity;
+          }
+        } else {
+          this.adjacencyMatrix[i] = new Array(vertex + 1).fill(Infinity);
+        }
+      }
+
+      this.vertices = vertex + 1;
+    }
+  }
+
   setEdge(
     source: number,
     destination: number,
@@ -30,23 +52,9 @@ export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
       throw new Error('Negative vertex is not allowed');
     }
 
-    const lastIndex = this.size() - 1;
+    const greaterIndex = Math.max(source, destination);
 
-    if (lastIndex < source || lastIndex < destination) {
-      const greaterIndex = Math.max(source, destination);
-
-      for (let i = 0; i <= greaterIndex; i++) {
-        if (i <= lastIndex) {
-          for (let j = lastIndex + 1; j <= greaterIndex; j++) {
-            this.adjacencyMatrix[i][j] = Infinity;
-          }
-        } else {
-          this.adjacencyMatrix[i] = new Array(greaterIndex + 1).fill(Infinity);
-        }
-      }
-
-      this.vertices = greaterIndex + 1;
-    }
+    this.setVertex(greaterIndex);
 
     if (weight !== undefined) {
       this.adjacencyMatrix[source][destination] = weight as number;

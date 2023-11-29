@@ -1,4 +1,4 @@
-import { GraphStorage_Interface } from './graph-storage.inferface';
+import { GraphStorage_Interface } from '@root/data-structures';
 
 export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
   private vertices: number;
@@ -16,6 +16,18 @@ export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
 
   size(): number {
     return this.vertices;
+  }
+
+  setVertex(vertex: number): void {
+    if (vertex < 0) {
+      throw new Error('Negative vertex is not allowed');
+    }
+
+    if (!this.adjacencyList.has(vertex)) {
+      this.adjacencyList.set(vertex, new Map<number, number>());
+    }
+
+    this.vertices = Math.max(this.vertices, vertex + 1);
   }
 
   setEdge(

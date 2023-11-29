@@ -1,19 +1,19 @@
-import { AdjacencyMatrix_GraphStorage } from '@root/data-structures';
+import { AdjacencyList_GraphStorage } from '@root/data-structures';
 
-describe('AdjacencyMatrix_GraphStorage', () => {
-  let graph: AdjacencyMatrix_GraphStorage;
+describe('AdjacencyList_GraphStorage', () => {
+  let graph: AdjacencyList_GraphStorage;
 
   beforeEach(() => {
-    graph = new AdjacencyMatrix_GraphStorage();
+    graph = new AdjacencyList_GraphStorage();
   });
 
   test('create a new graph', () => {
-    expect(graph).toBeInstanceOf(AdjacencyMatrix_GraphStorage);
+    expect(graph).toBeInstanceOf(AdjacencyList_GraphStorage);
     expect(graph.size()).toEqual(0);
   });
 
   test('should support initialize with size', () => {
-    const graph = new AdjacencyMatrix_GraphStorage(8);
+    const graph = new AdjacencyList_GraphStorage(8);
     expect(graph.size()).toEqual(8);
     expect(graph.weight(0, 7)).toEqual(Infinity);
   });
@@ -27,9 +27,13 @@ describe('AdjacencyMatrix_GraphStorage', () => {
     expect(graph.size()).toEqual(6);
   });
 
+  test('should be able to set a vertex', () => {
+    graph.setVertex(9);
+    expect(graph.weight(0, 9)).toEqual(Infinity);
+  });
+
   test('should be able to set edge between two vertices', () => {
     graph.setEdge(1, 2);
-
     expect(graph.weight(1, 2)).toEqual(0);
   });
 
@@ -53,11 +57,11 @@ describe('AdjacencyMatrix_GraphStorage', () => {
 
   test('should support weighted graph', () => {
     graph.setEdge(0, 1, 3);
-
     expect(graph.weight(0, 1)).toBe(3);
   });
 
   test('should handle negative vertex indices', () => {
+    expect(() => graph.setVertex(-1)).toThrow('Negative vertex is not allowed');
     expect(() => graph.setEdge(-1, 2)).toThrow(
       'Negative vertex is not allowed',
     );
