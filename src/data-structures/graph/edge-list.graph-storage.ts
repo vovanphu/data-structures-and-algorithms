@@ -3,9 +3,10 @@ import { GraphStorage_Interface } from '@root/data-structures';
 export class Edge {
   public source: number;
   public destination: number;
-  public weight?: number | undefined;
+  public weight: number;
 
-  constructor(source: number, destination: number, weight: number = 0) {
+  constructor(source: number, destination: number, weight?: number) {
+    weight = weight || 0;
     this.source = source;
     this.destination = destination;
     this.weight = weight;
