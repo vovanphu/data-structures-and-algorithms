@@ -9,13 +9,17 @@ export class Graph {
     private graphStorage: GraphStorage_Interface = new AdjacencyList_GraphStorage(),
   ) {
     if (edgesList !== undefined) {
-      for (let i = 0; i < edgesList.length; i++) {
-        const edge = edgesList[i];
-        const [source, destination, weight] = edge;
+      this.sets(edgesList);
+    }
+  }
 
-        if (source === undefined) continue;
-        this.set(source, destination, weight);
-      }
+  sets(edgesList: Array<Array<number>>): void {
+    for (let i = 0; i < edgesList.length; i++) {
+      const edge = edgesList[i];
+      const [source, destination, weight] = edge;
+
+      if (source === undefined) continue;
+      this.set(source, destination, weight);
     }
   }
 
