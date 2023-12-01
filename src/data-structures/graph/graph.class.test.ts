@@ -1,4 +1,5 @@
 import { Graph, GraphStorage_Interface } from '@root/data-structures';
+import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 
 class MockGraphStorage implements GraphStorage_Interface {
   vertices: Set<number> = new Set<number>();
@@ -32,11 +33,14 @@ class MockGraphStorage implements GraphStorage_Interface {
   }
 }
 
+jest.mock('./recursive.dfs-strategy');
+
 describe('Graph', () => {
   let graph: Graph;
   let mockGraphStorage: MockGraphStorage;
 
   beforeEach(() => {
+    jest.mocked(Recursive_DfsStrategy).mockClear();
     mockGraphStorage = new MockGraphStorage();
     graph = new Graph(undefined, mockGraphStorage);
   });
@@ -75,5 +79,13 @@ describe('Graph', () => {
     expect(graph.get(2, 4)).toEqual(4);
     expect(graph.get(1, 4)).toEqual(Infinity);
     expect(graph.neighbors(1)).toEqual([2, 3]);
+  });
+
+  it('should call the execute method of the dfsStrategy with the correct arguments', () => {
+    const callback = jest.fn();
+    graph.dfs(0, callback);
+    const dfsStrategy = jest.mocked(Recursive_DfsStrategy).mock.instances[0];
+    expect(jest.mocked(Recursive_DfsStrategy)).toHaveBeenCalledOnce();
+    expect(dfsStrategy.execute).toHaveBeenCalledWith(graph, 0, callback);
   });
 });

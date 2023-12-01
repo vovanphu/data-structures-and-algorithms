@@ -1,6 +1,8 @@
 import {
-  GraphStorage_Interface,
   AdjacencyList_GraphStorage,
+  DfsStrategy_Interface,
+  GraphStorage_Interface,
+  Recursive_DfsStrategy,
 } from '@root/data-structures';
 
 export class Graph {
@@ -42,5 +44,9 @@ export class Graph {
 
   neighbors(vertex: number): number[] {
     return this.graphStorage.neighbors(vertex);
+  }
+
+  dfs(startingVertex: number, callback: Function = () => {}): void {
+    new this.dfsStrategy().execute(this, startingVertex, callback);
   }
 }
