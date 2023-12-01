@@ -13,7 +13,7 @@ export class Recursive_DfsStrategy implements DfsStrategy_Interface {
     callback(startingVertex);
 
     const neighbors = graph.neighbors(startingVertex);
-    
+
     for (const neighbor of neighbors) {
       this.execute(graph, neighbor, callback, visited);
     }

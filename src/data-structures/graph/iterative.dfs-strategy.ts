@@ -16,7 +16,7 @@ export class Iterative_DfsStrategy implements DfsStrategy_Interface {
       callback(vertex);
 
       const neighbors = graph.neighbors(vertex);
-      
+
       for (let i = neighbors.length - 1; i > -1; i--) {
         const neighbor = neighbors[i];
         stack.push(neighbor);
