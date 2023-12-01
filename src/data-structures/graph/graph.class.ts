@@ -4,18 +4,22 @@ import {
 } from '@root/data-structures';
 
 export class Graph {
+  private graphStorage: GraphStorage_Interface;
+
+  public dfsStrategy: new (...args: any[]) => DfsStrategy_Interface =
+    Recursive_DfsStrategy;
+
   constructor(
-    edgesList?: Array<Array<number>>,
-    private graphStorage: GraphStorage_Interface = new AdjacencyList_GraphStorage(),
+    edgeList: Array<Array<number>> = [],
+    graphStorage: GraphStorage_Interface = new AdjacencyList_GraphStorage(),
   ) {
-    if (edgesList !== undefined) {
-      this.sets(edgesList);
-    }
+    this.graphStorage = graphStorage;
+    this.sets(edgeList);
   }
 
-  sets(edgesList: Array<Array<number>>): void {
-    for (let i = 0; i < edgesList.length; i++) {
-      const edge = edgesList[i];
+  sets(edgeList: Array<Array<number>>): void {
+    for (let i = 0; i < edgeList.length; i++) {
+      const edge = edgeList[i];
       const [source, destination, weight] = edge;
 
       if (source === undefined) continue;
