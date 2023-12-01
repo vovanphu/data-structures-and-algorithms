@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 export class Graph {
   vertices: number;
   adjacencyList: Map<number, number[]>;
