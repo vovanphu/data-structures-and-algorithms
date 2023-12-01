@@ -6,15 +6,10 @@ export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
   private adjacencyMatrix: Array<Array<number>>;
 
   constructor(size?: number) {
-    this.vertices = 0;
-    this.adjacencyMatrix = [];
-
-    if (size !== undefined) {
-      this.adjacencyMatrix = new Array(size).fill(
-        new Array(size).fill(Infinity),
-      );
-      this.vertices = size as number;
-    }
+    this.vertices = size ?? 0;
+    this.adjacencyMatrix = new Array(size)
+      .fill(undefined)
+      .map(() => new Array(size).fill(Infinity));
   }
 
   size(): number {
@@ -80,8 +75,8 @@ export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
       throw new Error('Out of graph bound');
     }
 
-    return this.adjacencyMatrix[vertex]
-      .map((v, i) => (v !== Infinity ? i : undefined))
-      .filter((i) => i !== undefined) as number[];
+    return this.adjacencyMatrix[vertex].flatMap((weight, i) =>
+      weight !== Infinity ? i : [],
+    );
   }
 }

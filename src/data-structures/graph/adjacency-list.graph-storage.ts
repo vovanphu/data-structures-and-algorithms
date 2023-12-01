@@ -6,12 +6,8 @@ export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
   private adjacencyList: Map<number, Map<number, number>>;
 
   constructor(size?: number) {
-    this.vertices = 0;
+    this.vertices = size ?? 0;
     this.adjacencyList = new Map<number, Map<number, number>>();
-
-    if (size !== undefined) {
-      this.vertices = size as number;
-    }
   }
 
   size(): number {
