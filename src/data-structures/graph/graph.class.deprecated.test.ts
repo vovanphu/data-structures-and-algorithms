@@ -1,4 +1,4 @@
-import { Graph } from './graph.class';
+import { Graph } from './graph.class.deprecated';
 
 describe('Graph.class.ts', () => {
   test('dfsRecursive', () => {

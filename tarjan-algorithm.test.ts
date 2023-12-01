@@ -1,4 +1,4 @@
-import { Graph } from './graph.class';
+import { Graph } from './src/data-structures/graph/graph.class.deprecated';
 import { tarjanAlgorithm } from './tarjan-algorithm';
 
 describe('Tarjan Algorithm', () => {

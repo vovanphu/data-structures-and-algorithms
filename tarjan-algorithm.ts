@@ -1,4 +1,4 @@
-import { Graph } from './graph.class';
+import { Graph } from './src/data-structures/graph/graph.class.deprecated';
 
 export function tarjanAlgorithm(graph: Graph): number {
   let sccCount = 0;
