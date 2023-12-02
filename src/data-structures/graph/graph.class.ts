@@ -4,7 +4,7 @@ import { GraphStorage_Interface } from './graph-storage.inferface';
 import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 
 export class Graph {
-  private graphStorage: GraphStorage_Interface;
+  protected graphStorage: GraphStorage_Interface;
 
   public dfsStrategy: new (...args: any[]) => DfsStrategy_Interface =
     Recursive_DfsStrategy;
