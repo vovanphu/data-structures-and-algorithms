@@ -7,3 +7,4 @@ export * from './graph-storage.inferface';
 export * from './graph.class';
 export * from './iterative.dfs-strategy';
 export * from './recursive.dfs-strategy';
+export * from './undirected-graph.class';
