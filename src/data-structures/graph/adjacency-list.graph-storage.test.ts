@@ -1,4 +1,4 @@
-import { AdjacencyList_GraphStorage } from '@root/data-structures';
+import { AdjacencyList_GraphStorage } from './adjacency-list.graph-storage';
 
 describe('AdjacencyList_GraphStorage', () => {
   let graph: AdjacencyList_GraphStorage;

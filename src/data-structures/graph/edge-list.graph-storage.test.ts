@@ -1,4 +1,4 @@
-import { EdgeList_GraphStorage } from '@root/data-structures';
+import { EdgeList_GraphStorage } from './edge-list.graph-storage';
 
 describe('EdgeList_GraphStorage', () => {
   let graph: EdgeList_GraphStorage;

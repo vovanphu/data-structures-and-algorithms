@@ -1,4 +1,5 @@
-import { DfsStrategy_Interface, Graph } from '@root/data-structures';
+import { DfsStrategy_Interface } from './dfs-strategy.interface';
+import { Graph } from './graph.class';
 
 export class Recursive_DfsStrategy implements DfsStrategy_Interface {
   execute(

@@ -1,5 +1,5 @@
-import { Recursive_DfsStrategy } from '@root/data-structures';
 import { Graph } from './graph.class';
+import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 
 // Mock the Graph class
 jest.mock('./graph.class');

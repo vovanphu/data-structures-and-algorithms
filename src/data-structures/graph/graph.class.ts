@@ -1,9 +1,7 @@
-import {
-  AdjacencyList_GraphStorage,
-  DfsStrategy_Interface,
-  GraphStorage_Interface,
-  Recursive_DfsStrategy,
-} from '@root/data-structures';
+import { AdjacencyList_GraphStorage } from './adjacency-list.graph-storage';
+import { DfsStrategy_Interface } from './dfs-strategy.interface';
+import { GraphStorage_Interface } from './graph-storage.inferface';
+import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 
 export class Graph {
   private graphStorage: GraphStorage_Interface;

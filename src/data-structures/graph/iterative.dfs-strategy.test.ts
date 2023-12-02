@@ -1,5 +1,5 @@
-import { Iterative_DfsStrategy } from '@root/data-structures';
 import { Graph } from './graph.class';
+import { Iterative_DfsStrategy } from './iterative.dfs-strategy';
 
 // Mock the Graph class
 jest.mock('./graph.class');

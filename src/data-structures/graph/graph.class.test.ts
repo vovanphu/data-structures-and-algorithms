@@ -1,4 +1,5 @@
-import { Graph, GraphStorage_Interface } from '@root/data-structures';
+import { GraphStorage_Interface } from './graph-storage.inferface';
+import { Graph } from './graph.class';
 import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 
 class MockGraphStorage implements GraphStorage_Interface {

@@ -1,4 +1,4 @@
-import { GraphStorage_Interface } from '@root/data-structures';
+import { GraphStorage_Interface } from './graph-storage.inferface';
 
 export class Edge {
   public source: number;
