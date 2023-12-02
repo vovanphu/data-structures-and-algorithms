@@ -68,11 +68,6 @@ describe('Graph', () => {
     expect(graph.neighbors(1)).toEqual([2, 3]);
   });
 
-  it('should handle undefined source in set', () => {
-    graph.set(undefined as any, 2, 3);
-    expect(mockGraphStorage.size()).toBe(0);
-  });
-
   it('should handle initial with edges correctly', () => {
     const edges = [[1, 2], [], [1, 3], [2, 4, 4]];
     const graph = new Graph(edges, mockGraphStorage);

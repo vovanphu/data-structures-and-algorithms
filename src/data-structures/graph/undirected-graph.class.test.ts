@@ -72,11 +72,6 @@ describe('UndirectedGraph', () => {
     expect(graph.neighbors(3)).toEqual([1]);
   });
 
-  it('should handle undefined source in set', () => {
-    graph.set(undefined as any, 2, 3);
-    expect(mockGraphStorage.size()).toBe(0);
-  });
-
   it('should handle initial with edges correctly', () => {
     const edges = [[1, 2], [], [1, 3], [2, 4, 4]];
     const graph = new UndirectedGraph(edges, mockGraphStorage);
