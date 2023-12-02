@@ -1,4 +1,4 @@
-import { GraphStorage_Interface } from './graph-storage.inferface';
+import { GraphStorage_Interface } from './graph-storage.interface';
 import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 import { UndirectedGraph } from './undirected-graph.class';
 

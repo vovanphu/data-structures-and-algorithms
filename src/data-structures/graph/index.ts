@@ -3,7 +3,7 @@ export * from './adjacency-matrix.graph-storage';
 export * from './dfs-strategy.interface';
 export * from './directed-graph.class';
 export * from './edge-list.graph-storage';
-export * from './graph-storage.inferface';
+export * from './graph-storage.interface';
 export * from './graph.class';
 export * from './iterative.dfs-strategy';
 export * from './recursive.dfs-strategy';

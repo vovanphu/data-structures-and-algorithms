@@ -1,4 +1,4 @@
-import { GraphStorage_Interface } from './graph-storage.inferface';
+import { GraphStorage_Interface } from './graph-storage.interface';
 
 export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
   private vertices: number;
