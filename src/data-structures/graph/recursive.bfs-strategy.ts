@@ -1,8 +1,8 @@
-import { BfsStrategy } from './bfs-strategy.interface';
+import { BfsStrategy_Interface } from './bfs-strategy.interface';
 import { Graph } from './graph.class';
 import { Queue } from '../queue/queue.class';
 
-export class Recursive_BfsStrategy implements BfsStrategy {
+export class Recursive_BfsStrategy implements BfsStrategy_Interface {
   execute(
     graph: Graph,
     startingVertex: number,

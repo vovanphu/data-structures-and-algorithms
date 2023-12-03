@@ -1,8 +1,8 @@
-import { BfsStrategy } from './bfs-strategy.interface';
+import { BfsStrategy_Interface } from './bfs-strategy.interface';
 import { Graph } from './graph.class';
 import { Queue } from '../queue/queue.class';
 
-export class Iterative_BfsStrategy implements BfsStrategy {
+export class Iterative_BfsStrategy implements BfsStrategy_Interface {
   execute(graph: Graph, startingVertex: number, callback: Function) {
     const visited: boolean[] = new Array<boolean>(graph.size()).fill(false);
     const queue: Queue<number> = new Queue();
