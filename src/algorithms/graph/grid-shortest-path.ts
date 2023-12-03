@@ -4,7 +4,7 @@ export function gridShortestPath(
   grid: string[][],
   startingRow: number = 0,
   startingColumn: number = 0,
-): number {
+): number[][] | undefined {
   // Grid sizes
   const R = grid.length;
   const C = R === 0 ? 0 : grid[0].length;
@@ -35,22 +35,30 @@ export function gridShortestPath(
     .fill(undefined)
     .map(() => new Array(C).fill(false));
 
+  // Variables used for tracking path
+  let isFound: boolean = false;
+  let current: number[] = [-1, -1];
+  const parents: number[][][] = new Array(R)
+    .fill(undefined)
+    .map(() => new Array(C).fill(undefined));
+
   qr.enqueue(startingRow);
   qc.enqueue(startingColumn);
+  visited[startingRow][startingColumn] = true;
   stepsInCurrentLayer = 1;
 
   while (qr.size() > 0) {
     // Dequeue to get the current location
     const r = qr.dequeue() as number;
     const c = qc.dequeue() as number;
+    current = [r, c];
     stepsInCurrentLayer--;
 
-    // Ignore visited location
-    if (visited[r][c]) continue;
-    visited[r][c] = true;
-
     // Return on success
-    if (grid[r][c] === 'e') return count;
+    if (grid[r][c] === 'e') {
+      isFound = true;
+      break;
+    }
 
     // Try to navigate neighbors
     for (let i = 0; i < dr.length; i++) {
@@ -63,15 +71,20 @@ export function gridShortestPath(
       if (cc < 0 || cc >= C) continue;
 
       // Check on obstacle
-      if (grid[r][c] === 'x') continue;
+      if (grid[rr][cc] === 'x') continue;
+
+      // Ignore visited location
+      if (visited[rr][cc]) continue;
 
       // Add more location to the queue
       qr.enqueue(rr);
       qc.enqueue(cc);
-      stepsInNextLayer++;
+      visited[rr][cc] = true;
+      parents[rr][cc] = current;
+      stepsInNextLayer++; // Count steps in a layer
     }
 
-    // Counting
+    // Counting number of layers have searched
     if (stepsInCurrentLayer === 0) {
       stepsInCurrentLayer = stepsInNextLayer;
       stepsInNextLayer = 0;
@@ -79,5 +92,17 @@ export function gridShortestPath(
     }
   }
 
-  return -1;
+  // Construct the shortest path on found
+  if (isFound) {
+    const reversed: number[][] = [];
+
+    while (current !== undefined) {
+      reversed.push(current);
+      current = parents[current[0]][current[1]];
+    }
+
+    return reversed.reverse();
+  }
+
+  return undefined;
 }
