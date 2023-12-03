@@ -1,5 +1,6 @@
 import { GraphStorage_Interface } from './graph-storage.interface';
 import { Graph } from './graph.class';
+import { Iterative_BfsStrategy } from './iterative.bfs-strategy';
 import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 
 class MockGraphStorage implements GraphStorage_Interface {
@@ -35,6 +36,7 @@ class MockGraphStorage implements GraphStorage_Interface {
 }
 
 jest.mock('./recursive.dfs-strategy');
+jest.mock('./iterative.bfs-strategy');
 
 describe('Graph', () => {
   let graph: Graph;
@@ -42,6 +44,7 @@ describe('Graph', () => {
 
   beforeEach(() => {
     jest.mocked(Recursive_DfsStrategy).mockClear();
+    jest.mocked(Iterative_BfsStrategy).mockClear();
     mockGraphStorage = new MockGraphStorage();
     graph = new Graph(undefined, mockGraphStorage);
   });
@@ -83,5 +86,13 @@ describe('Graph', () => {
     const dfsStrategy = jest.mocked(Recursive_DfsStrategy).mock.instances[0];
     expect(jest.mocked(Recursive_DfsStrategy)).toHaveBeenCalledOnce();
     expect(dfsStrategy.execute).toHaveBeenCalledWith(graph, 0, callback);
+  });
+
+  it('should call the execute method of the bfsStrategy with the correct arguments', () => {
+    const callback = jest.fn();
+    graph.bfs(0, callback);
+    const bfsStrategy = jest.mocked(Iterative_BfsStrategy).mock.instances[0];
+    expect(jest.mocked(Iterative_BfsStrategy)).toHaveBeenCalledOnce();
+    expect(bfsStrategy.execute).toHaveBeenCalledWith(graph, 0, callback);
   });
 });

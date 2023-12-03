@@ -1,6 +1,8 @@
 import { AdjacencyList_GraphStorage } from './adjacency-list.graph-storage';
+import { BfsStrategy_Interface } from './bfs-strategy.interface';
 import { DfsStrategy_Interface } from './dfs-strategy.interface';
 import { GraphStorage_Interface } from './graph-storage.interface';
+import { Iterative_BfsStrategy } from './iterative.bfs-strategy';
 import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 
 export class Graph {
@@ -8,6 +10,9 @@ export class Graph {
 
   public dfsStrategy: new (...args: any[]) => DfsStrategy_Interface =
     Recursive_DfsStrategy;
+
+  public bfsStrategy: new (...args: any[]) => BfsStrategy_Interface =
+    Iterative_BfsStrategy;
 
   constructor(
     edgeList: Array<Array<number>> = [],
@@ -46,5 +51,9 @@ export class Graph {
 
   dfs(startingVertex: number, callback: Function = () => {}): void {
     new this.dfsStrategy().execute(this, startingVertex, callback);
+  }
+
+  bfs(startingVertex: number, callback: Function = () => {}): void {
+    new this.bfsStrategy().execute(this, startingVertex, callback);
   }
 }
