@@ -12,7 +12,14 @@ import { topSort } from './top-sort';
  * This algorithm use topology order as
  * barebone for traversal and relaxing
  * each node by compare the current
- * shortest with new distance
+ * shortest with new distance.
+ * 
+ * Note: This algorithm works well with DAG
+ * and it can handle negative edges
+ * 
+ * Time complexity: `O(V + E)`
+ * Since it visit every vertices
+ * and every edges of the graph
  */
 export function dagShortest(
   graph: Graph,
