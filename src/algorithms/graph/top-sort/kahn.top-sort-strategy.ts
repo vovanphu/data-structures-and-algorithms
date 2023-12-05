@@ -6,7 +6,7 @@ export class Kahn_TopSortStrategy implements TopSortStrategy_Interface {
    * Construct topology order using kahn's algorithm
    * @param graph
    * @returns The topology order
-   * 
+   *
    * This algorithm is very easy to understand and
    * implement. And it has a huge advantage compare
    * to the dfs version since it will return an empty

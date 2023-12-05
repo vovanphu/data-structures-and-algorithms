@@ -16,7 +16,7 @@ describe('topSort', () => {
   test('should create strategy instance once', () => {
     const graph = new DirectedGraph();
     topSort(graph, MockTopSortStrategy);
-    
+
     expect(jest.mocked(MockTopSortStrategy)).toHaveBeenCalledOnce();
   });
 
