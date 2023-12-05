@@ -1,5 +1,5 @@
 import { Graph } from '@root/data-structures';
-import { dagShortestPath } from './dag-shortest-path';
+import { dagShortest } from './dag-shortest';
 
 describe('DAG Shortest Path', () => {
   test('should calculate the shortest paths in a DAG', () => {
@@ -11,14 +11,14 @@ describe('DAG Shortest Path', () => {
       [3, 4, 1],
     ]);
     const startVertex = 0;
-    const result = dagShortestPath(graph, startVertex);
+    const result = dagShortest(graph, startVertex);
     expect(result).toEqual([0, 3, 5, 5, 6]);
   });
 
   test('should handle an empty graph', () => {
     const graph = new Graph();
     const startVertex = 0;
-    expect(() => dagShortestPath(graph, startVertex)).toThrow(
+    expect(() => dagShortest(graph, startVertex)).toThrow(
       'Invalid input parameters',
     );
   });
@@ -33,7 +33,7 @@ describe('DAG Shortest Path', () => {
       [5],
     ]);
     const startVertex = 5; // Unreachable vertex
-    const result = dagShortestPath(graph, startVertex);
+    const result = dagShortest(graph, startVertex);
     expect(result).toEqual([
       Infinity,
       Infinity,

@@ -14,7 +14,7 @@ import { topSort } from './top-sort';
  * each node by compare the current
  * shortest with new distance
  */
-export function dagShortestPath(
+export function dagShortest(
   graph: Graph,
   startingVertex: number,
 ): number[] {
