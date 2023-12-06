@@ -1,4 +1,4 @@
-import { BinaryHeap } from './binary-heap.class';
+import { BinaryHeap } from './src/data-structures/heap/binary-heap.deprecated.class';
 
 export class IndexedPriorityQueue<
   V extends any = any,

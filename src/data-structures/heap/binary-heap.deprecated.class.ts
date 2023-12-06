@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 export class BinaryHeap<T = number> {
   private heap: T[] = [];
   private compare: Function;

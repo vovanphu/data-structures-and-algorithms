@@ -1,4 +1,4 @@
-import { BinaryHeap } from './binary-heap.class';
+import { BinaryHeap } from './binary-heap.deprecated.class';
 
 describe('BinaryHeap', () => {
   it('should insert values and maintain heap property', () => {
