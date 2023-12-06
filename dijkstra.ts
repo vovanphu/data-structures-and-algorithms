@@ -1,5 +1,5 @@
 import { WeightedGraph } from './weighted-graph.class';
-import { IndexedPriorityQueue } from './indexed-priority-queue.class';
+import { IndexedPriorityQueue } from './src/data-structures/queue/indexed-priority-queue.class';
 
 export function dijkstra(graph: WeightedGraph, startIndex: number): number[] {
   const dist: number[] = new Array(graph.size()).fill(Infinity);
