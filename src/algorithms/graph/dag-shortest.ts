@@ -13,18 +13,15 @@ import { topSort } from './top-sort';
  * barebone for traversal and relaxing
  * each node by compare the current
  * shortest with new distance.
- * 
+ *
  * Note: This algorithm works well with DAG
  * and it can handle negative edges
- * 
+ *
  * Time complexity: `O(V + E)`
  * Since it visit every vertices
  * and every edges of the graph
  */
-export function dagShortest(
-  graph: Graph,
-  startingVertex: number,
-): number[] {
+export function dagShortest(graph: Graph, startingVertex: number): number[] {
   if (!graph || startingVertex < 0 || startingVertex >= graph.size()) {
     throw new Error('Invalid input parameters');
   }
