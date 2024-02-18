@@ -84,8 +84,8 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
       throw new Error('Out of graph bound');
     }
 
-    return this.edges
-      .filter((edge) => edge.source === vertex)
-      .map((edge) => edge.destination);
+    return this.edges.flatMap((edge) => {
+      return edge.source === vertex ? edge.destination : [];
+    });
   }
 }
