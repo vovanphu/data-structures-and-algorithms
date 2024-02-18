@@ -1,5 +1,5 @@
 import { DfsStrategy_Interface } from './dfs-strategy.interface';
-import { Graph } from './graph.class';
+import { Graph } from '../graph.class';
 
 export class Recursive_DfsStrategy implements DfsStrategy_Interface {
   execute(

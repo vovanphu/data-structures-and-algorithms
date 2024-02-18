@@ -1,8 +1,8 @@
-import { Graph } from './graph.class';
+import { Graph } from '../graph.class';
 import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
 
 // Mock the Graph class
-jest.mock('./graph.class');
+jest.mock('./../graph.class');
 
 beforeEach(() => {
   // Clear all instances and calls to constructor and all methods

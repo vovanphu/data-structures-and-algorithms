@@ -1,9 +1,9 @@
-import { Graph } from './graph.class';
-import { Recursive_BfsStrategy } from './recursive.bfs-strategy';
+import { Graph } from '../graph.class';
+import { Iterative_BfsStrategy } from './iterative.bfs-strategy';
 
-describe('Recursive_BfsStrategy', () => {
+describe('Iterative_BfsStrategy', () => {
   describe('handle bfs', () => {
-    const bfsStrategy = new Recursive_BfsStrategy();
+    const bfsStrategy = new Iterative_BfsStrategy();
     let output: number[] = [];
     const callback = jest.fn((vertex: number) => output.push(vertex));
 

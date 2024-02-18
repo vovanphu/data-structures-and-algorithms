@@ -1,5 +1,5 @@
-import { Graph } from './graph.class';
+import { Graph } from '../graph.class';
 
-export interface DfsStrategy_Interface {
+export interface BfsStrategy_Interface {
   execute: (graph: Graph, startingVertex: number, callback: Function) => void;
 }

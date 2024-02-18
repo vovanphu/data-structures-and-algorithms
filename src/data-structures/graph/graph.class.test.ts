@@ -1,7 +1,7 @@
-import { GraphStorage_Interface } from './graph-storage.interface';
+import { GraphStorage_Interface } from './graph-storage/graph-storage.interface';
 import { Graph } from './graph.class';
-import { Iterative_BfsStrategy } from './iterative.bfs-strategy';
-import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
+import { Iterative_BfsStrategy } from './bfs-strategy/iterative.bfs-strategy';
+import { Recursive_DfsStrategy } from './dfs-strategy/recursive.dfs-strategy';
 
 class MockGraphStorage implements GraphStorage_Interface {
   vertices: Set<number> = new Set<number>();
@@ -35,8 +35,8 @@ class MockGraphStorage implements GraphStorage_Interface {
   }
 }
 
-jest.mock('./recursive.dfs-strategy');
-jest.mock('./iterative.bfs-strategy');
+jest.mock('./dfs-strategy/recursive.dfs-strategy');
+jest.mock('./bfs-strategy/iterative.bfs-strategy');
 
 describe('Graph', () => {
   let graph: Graph;

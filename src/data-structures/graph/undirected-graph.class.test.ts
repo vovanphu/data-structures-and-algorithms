@@ -1,5 +1,5 @@
-import { GraphStorage_Interface } from './graph-storage.interface';
-import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
+import { GraphStorage_Interface } from './graph-storage/graph-storage.interface';
+import { Recursive_DfsStrategy } from './dfs-strategy/recursive.dfs-strategy';
 import { UndirectedGraph } from './undirected-graph.class';
 
 class MockGraphStorage implements GraphStorage_Interface {
@@ -34,7 +34,7 @@ class MockGraphStorage implements GraphStorage_Interface {
   }
 }
 
-jest.mock('./recursive.dfs-strategy');
+jest.mock('./dfs-strategy/recursive.dfs-strategy');
 
 describe('UndirectedGraph', () => {
   let graph: UndirectedGraph;

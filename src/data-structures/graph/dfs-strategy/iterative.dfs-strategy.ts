@@ -1,5 +1,5 @@
 import { DfsStrategy_Interface } from './dfs-strategy.interface';
-import { Graph } from './graph.class';
+import { Graph } from '../graph.class';
 
 export class Iterative_DfsStrategy implements DfsStrategy_Interface {
   execute(graph: Graph, startingVertex: number, callback: Function): void {

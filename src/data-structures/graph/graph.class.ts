@@ -1,9 +1,9 @@
-import { AdjacencyList_GraphStorage } from './adjacency-list.graph-storage';
-import { BfsStrategy_Interface } from './bfs-strategy.interface';
-import { DfsStrategy_Interface } from './dfs-strategy.interface';
-import { GraphStorage_Interface } from './graph-storage.interface';
-import { Iterative_BfsStrategy } from './iterative.bfs-strategy';
-import { Recursive_DfsStrategy } from './recursive.dfs-strategy';
+import { AdjacencyList_GraphStorage } from './graph-storage/adjacency-list.graph-storage';
+import { BfsStrategy_Interface } from './bfs-strategy/bfs-strategy.interface';
+import { DfsStrategy_Interface } from './dfs-strategy/dfs-strategy.interface';
+import { GraphStorage_Interface } from './graph-storage/graph-storage.interface';
+import { Iterative_BfsStrategy } from './bfs-strategy/iterative.bfs-strategy';
+import { Recursive_DfsStrategy } from './dfs-strategy/recursive.dfs-strategy';
 
 export class Graph {
   protected graphStorage: GraphStorage_Interface;
