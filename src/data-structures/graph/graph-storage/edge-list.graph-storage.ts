@@ -48,7 +48,6 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
     }
 
     weight = weight || 0;
-    const newEdge = new Edge(source, destination, weight);
     const existEdgeIndex = this.edges.findIndex(
       (edge) => edge.source === source && edge.destination === destination,
     );
@@ -56,6 +55,7 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
     if (existEdgeIndex > -1) {
       this.edges[existEdgeIndex].weight = weight;
     } else {
+      const newEdge = new Edge(source, destination, weight);
       this.edges.push(newEdge);
     }
 
