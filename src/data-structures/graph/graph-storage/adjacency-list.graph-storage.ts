@@ -42,7 +42,7 @@ export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
     if (weight !== undefined) {
       this.adjacencyList.get(source)?.set(destination, weight as number);
     } else {
-      this.adjacencyList.get(source)?.set(destination, 0);
+      this.adjacencyList.get(source)?.set(destination, 1);
     }
 
     this.vertices = Math.max(this.vertices, source + 1, destination + 1);

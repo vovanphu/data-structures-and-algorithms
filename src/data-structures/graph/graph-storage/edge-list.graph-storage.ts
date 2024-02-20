@@ -6,7 +6,7 @@ export class Edge {
   public weight: number;
 
   constructor(source: number, destination: number, weight?: number) {
-    weight = weight || 0;
+    weight = weight || 1;
     this.source = source;
     this.destination = destination;
     this.weight = weight;
@@ -47,7 +47,7 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
       throw new Error('Negative vertex is not allowed');
     }
 
-    weight = weight || 0;
+    weight = weight || 1;
     const existEdgeIndex = this.edges.findIndex(
       (edge) => edge.source === source && edge.destination === destination,
     );

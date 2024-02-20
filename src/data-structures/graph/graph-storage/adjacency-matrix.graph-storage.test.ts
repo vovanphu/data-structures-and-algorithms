@@ -34,7 +34,7 @@ describe('AdjacencyMatrix_GraphStorage', () => {
 
   test('should be able to set edge between two vertices', () => {
     graph.setEdge(1, 2);
-    expect(graph.weight(1, 2)).toEqual(0);
+    expect(graph.weight(1, 2)).toEqual(1);
   });
 
   test('should return Infinity if there is no edge between two vertices', () => {
@@ -46,13 +46,13 @@ describe('AdjacencyMatrix_GraphStorage', () => {
     expect(graph.weight(1, 5)).toEqual(Infinity);
   });
 
-  test('should return 0 as weight in case unweighted graph', () => {
+  test('should return 1 as weight in case unweighted graph', () => {
     graph.setEdge(0, 1);
     graph.setEdge(1, 2);
     graph.setEdge(1, 3);
     graph.setEdge(2, 5);
 
-    expect(graph.weight(1, 3)).toEqual(0);
+    expect(graph.weight(1, 3)).toEqual(1);
   });
 
   test('should support weighted graph', () => {

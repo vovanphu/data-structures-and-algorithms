@@ -54,7 +54,7 @@ export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
     if (weight !== undefined) {
       this.adjacencyMatrix[source][destination] = weight as number;
     } else {
-      this.adjacencyMatrix[source][destination] = 0;
+      this.adjacencyMatrix[source][destination] = 1;
     }
   }
 
