@@ -8,14 +8,13 @@ export class Recursive_DfsStrategy implements DfsStrategy_Interface {
     callback: Function,
     visited: boolean[] = new Array(graph.size()).fill(false),
   ): void {
-    if (visited[startingVertex]) return;
-
     visited[startingVertex] = true;
     callback(startingVertex);
 
     const neighbors = graph.neighbors(startingVertex);
 
     for (const neighbor of neighbors) {
+      if (visited[neighbor]) continue;
       this.execute(graph, neighbor, callback, visited);
     }
   }
