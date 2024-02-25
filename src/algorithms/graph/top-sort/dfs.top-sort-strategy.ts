@@ -4,6 +4,8 @@ import { TopSortStrategy_Interface } from './top-sort-strategy.interface';
 export class Dfs_TopSortStrategy implements TopSortStrategy_Interface {
   /**
    * Construct topology order using depth first search
+   * Warning: This algorithm may not work properly if there is a cycle
+   * in the directed graph
    * @param graph
    * @returns The topology order
    */
