@@ -1,7 +1,7 @@
 import { DirectedGraph } from '@root/data-structures';
 import { TopSortStrategy_Interface } from './top-sort-strategy.interface';
 
-export class Recursive_TopSortStrategy implements TopSortStrategy_Interface {
+export class Dfs_TopSortStrategy implements TopSortStrategy_Interface {
   /**
    * Construct topology order using kahn's algorithm
    * @param graph
