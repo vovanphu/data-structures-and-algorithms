@@ -3,7 +3,7 @@ import { TopSortStrategy_Interface } from './top-sort-strategy.interface';
 
 export class Dfs_TopSortStrategy implements TopSortStrategy_Interface {
   /**
-   * Construct topology order using kahn's algorithm
+   * Construct topology order using depth first search
    * @param graph
    * @returns The topology order
    */
