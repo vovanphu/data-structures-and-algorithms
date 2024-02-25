@@ -22,6 +22,7 @@ export class Recursive_TopSortStrategy implements TopSortStrategy_Interface {
     for (let vertex = 0; vertex < graph.size(); vertex++) {
       if (visited[vertex]) continue;
       visited[vertex] = true;
+
       currentIndex = this.topSort(graph, vertex, visited, order, currentIndex);
     }
 
@@ -47,6 +48,7 @@ export class Recursive_TopSortStrategy implements TopSortStrategy_Interface {
     for (const neighbor of graph.neighbors(vertex)) {
       if (visited[neighbor]) continue;
       visited[neighbor] = true;
+
       currentIndex = this.topSort(
         graph,
         neighbor,
