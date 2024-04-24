@@ -43,7 +43,7 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
       throw new Error('Negative vertex is not allowed');
     }
 
-    weight = weight || 1;
+    weight = weight ?? 1;
     const existEdgeIndex = this.edges.findIndex(
       (edge) => edge.source === source && edge.destination === destination,
     );
