@@ -16,7 +16,7 @@ export class Edge {
     this._weight = value ?? Edge.DEFAULT_WEIGHT;
   }
 
-  get weight() {
+  get weight(): number {
     return this._weight;
   }
 }
