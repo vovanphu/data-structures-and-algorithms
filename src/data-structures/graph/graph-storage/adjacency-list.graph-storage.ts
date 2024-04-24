@@ -29,7 +29,7 @@ export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
   setEdge(
     source: number,
     destination: number,
-    weight?: number | undefined,
+    weight?: number,
   ): void {
     if (source < 0 || destination < 0) {
       throw new Error('Negative vertex is not allowed');

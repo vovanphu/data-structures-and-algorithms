@@ -32,7 +32,7 @@ export class Graph {
     }
   }
 
-  set(source: number, destination?: number, weight?: number | undefined): void {
+  set(source: number, destination?: number, weight?: number): void {
     if (destination === undefined) this.graphStorage.setVertex(source);
     else this.graphStorage.setEdge(source, destination, weight);
   }
