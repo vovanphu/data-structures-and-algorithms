@@ -47,8 +47,8 @@ export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
 
     this.setVertex(greaterIndex);
 
-    weight = weight ?? 1;
-    this.adjacencyMatrix[source][destination] = weight as number;
+    weight = (weight ?? 1) as number;
+    this.adjacencyMatrix[source][destination] = weight;
   }
 
   weight(source: number, destination: number): number {
