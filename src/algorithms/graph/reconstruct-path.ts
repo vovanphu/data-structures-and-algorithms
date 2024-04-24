@@ -10,7 +10,7 @@ export function reconstructPath(
   prev: Array<number | undefined>,
   start: number,
   end: number,
-): number[] | undefined {
+): number[] {
   if (start < 0 || end < 0) {
     throw new Error('Negative vertex is not supported');
   }
@@ -27,5 +27,5 @@ export function reconstructPath(
   const path = reversed.reverse();
 
   if (path[0] === start) return path;
-  return undefined;
+  return [];
 }
