@@ -1,15 +1,23 @@
 import { GraphStorage_Interface } from './graph-storage.interface';
 
 export class Edge {
+  static DEFAULT_WEIGHT = 1;
   public source: number;
   public destination: number;
-  public weight: number;
+  private _weight: number = Edge.DEFAULT_WEIGHT;
 
   constructor(source: number, destination: number, weight?: number) {
-    weight = weight || 1;
     this.source = source;
     this.destination = destination;
     this.weight = weight;
+  }
+
+  set weight(value: number | undefined) {
+    this._weight = value ?? Edge.DEFAULT_WEIGHT;
+  }
+
+  get weight() {
+    return this._weight;
   }
 }
 
@@ -43,7 +51,6 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
       throw new Error('Negative vertex is not allowed');
     }
 
-    weight = weight ?? 1;
     const existEdgeIndex = this.edges.findIndex(
       (edge) => edge.source === source && edge.destination === destination,
     );
