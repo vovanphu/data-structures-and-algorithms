@@ -12,11 +12,11 @@ export class Iterative_BfsStrategy implements BfsStrategy_Interface {
     while (queue.peek() !== undefined) {
       const vertex = queue.dequeue() as number;
 
-      if (visited[vertex]) continue;
       visited[vertex] = true;
       callback(vertex);
 
       for (const neighbor of graph.neighbors(vertex)) {
+        if (visited[neighbor]) continue;
         queue.enqueue(neighbor);
       }
     }

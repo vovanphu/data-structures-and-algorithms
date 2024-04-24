@@ -24,13 +24,12 @@ export class Recursive_BfsStrategy implements BfsStrategy_Interface {
 
     const vertex = queue.dequeue() as number;
 
-    if (!visited[vertex]) {
-      visited[vertex] = true;
-      callback(vertex);
+    visited[vertex] = true;
+    callback(vertex);
 
-      for (const neighbor of graph.neighbors(vertex)) {
-        queue.enqueue(neighbor);
-      }
+    for (const neighbor of graph.neighbors(vertex)) {
+      if (visited[neighbor]) continue;
+      queue.enqueue(neighbor);
     }
 
     this._bfs(graph, callback, queue, visited);

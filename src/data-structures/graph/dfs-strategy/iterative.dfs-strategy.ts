@@ -11,8 +11,6 @@ export class Iterative_DfsStrategy implements DfsStrategy_Interface {
     while (stack.length > 0) {
       const vertex: number = stack.pop() as number;
 
-      if (visited[vertex]) continue;
-
       visited[vertex] = true;
       callback(vertex);
 
@@ -20,6 +18,7 @@ export class Iterative_DfsStrategy implements DfsStrategy_Interface {
 
       for (let i = neighbors.length - 1; i > -1; i--) {
         const neighbor = neighbors[i];
+        if (visited[neighbor]) continue;
         stack.push(neighbor);
       }
     }
