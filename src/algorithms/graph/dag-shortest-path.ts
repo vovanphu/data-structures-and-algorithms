@@ -21,13 +21,21 @@ import { topSort } from './top-sort';
  * Since it visit every vertices
  * and every edges of the graph
  */
-export function dagShortest(graph: Graph, startingVertex: number): number[] {
-  if (!graph || startingVertex < 0 || startingVertex >= graph.size()) {
+export function dagShortestPath(
+  graph: Graph,
+  startingVertex: number,
+): number[] {
+  if (!graph) {
     throw new Error('Invalid input parameters');
+  }
+
+  if (startingVertex < 0 || startingVertex >= graph.size()) {
+    throw new Error('Out of graph bound');
   }
 
   // Variables for result
   const dist: number[] = Array.from({ length: graph.size() }, () => Infinity);
+  const parents: number[] = Array.from({ length: graph.size() });
 
   // Variables for traversal
   const topOrder = topSort(graph);
@@ -37,6 +45,8 @@ export function dagShortest(graph: Graph, startingVertex: number): number[] {
 
   // Traversing and relaxing node
   for (const vertex of topOrder) {
+    // Encounter Infinity distance node on topo sort means
+    // there are no path from the starting node to this node
     if (dist[vertex] === Infinity) continue;
 
     // Relaxing by compare shortest distances
@@ -45,9 +55,12 @@ export function dagShortest(graph: Graph, startingVertex: number): number[] {
     // current vertex and current neigbor
     for (const neighbor of graph.neighbors(vertex)) {
       const weight = graph.get(vertex, neighbor);
-      dist[neighbor] = Math.min(dist[neighbor], dist[vertex] + weight);
+      if (dist[vertex] + weight < dist[neighbor]) {
+        dist[neighbor] = dist[vertex] + weight;
+        parents[neighbor] = vertex;
+      }
     }
   }
 
-  return dist;
+  return parents;
 }
