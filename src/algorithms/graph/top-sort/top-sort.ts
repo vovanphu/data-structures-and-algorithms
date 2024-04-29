@@ -1,6 +1,8 @@
 import { Graph } from '@root/data-structures';
-import { Kahn_TopSortStrategy } from './kahn.top-sort-strategy';
-import { TopSortStrategy_Interface } from './top-sort-strategy.interface';
+import {
+  TopSortStrategy_Interface,
+  Kahn_TopSortStrategy,
+} from './top-sort-strategy';
 
 export function topSort(
   graph: Graph,
