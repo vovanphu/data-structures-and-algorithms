@@ -29,4 +29,16 @@ describe('Topological Sort (Recursive)', () => {
     const result = new Dfs_TopSortStrategy().execute(graph);
     expect(result).toEqual([0]);
   });
+
+  test('should handle a graph with circle', () => {
+    const graph = new DirectedGraph([
+      [0, 1],
+      [1, 2],
+      [2, 3],
+      [3, 1],
+    ]);
+
+    const result = new Dfs_TopSortStrategy().execute(graph);
+    expect(result).toEqual([]);
+  });
 });

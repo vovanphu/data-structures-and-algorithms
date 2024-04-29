@@ -29,6 +29,7 @@ describe("Topological Sort (Kahn's algorithm)", () => {
     const result = new Kahn_TopSortStrategy().execute(graph);
     expect(result).toEqual([0]);
   });
+
   test('should handle a graph with circle', () => {
     const graph = new DirectedGraph([
       [0, 1],

@@ -4,8 +4,6 @@ import { TopSortStrategy_Interface } from './top-sort-strategy.interface';
 export class Dfs_TopSortStrategy implements TopSortStrategy_Interface {
   /**
    * Construct topology order using depth first search
-   * Warning: This algorithm may not work properly if there is a cycle
-   * in the directed graph
    * @param graph
    * @returns The topology order
    */
@@ -15,17 +13,29 @@ export class Dfs_TopSortStrategy implements TopSortStrategy_Interface {
     let currentIndex = graph.size() - 1;
 
     // Variables for traversal
-    const visited: boolean[] = Array.from(
+    const permenant_visited: boolean[] = Array.from(
       { length: graph.size() },
       () => false,
     );
 
     // Calculate top order
     for (let vertex = 0; vertex < graph.size(); vertex++) {
-      if (visited[vertex]) continue;
-      visited[vertex] = true;
+      if (permenant_visited[vertex]) continue;
 
-      currentIndex = this.topSort(graph, vertex, visited, order, currentIndex);
+      try {
+        currentIndex = this.topSort(
+          graph,
+          vertex,
+          order,
+          currentIndex,
+          permenant_visited,
+        );
+      } catch (e: unknown) {
+        if (e instanceof Error && e.message === 'Graph has cycle') {
+          return [];
+        }
+        throw e;
+      }
     }
 
     return order;
@@ -35,7 +45,7 @@ export class Dfs_TopSortStrategy implements TopSortStrategy_Interface {
    * Helper function
    * @param graph
    * @param vertex
-   * @param visited
+   * @param permenant_visited
    * @param order
    * @param currentIndex
    * @returns new value of the currentIndex
@@ -43,23 +53,34 @@ export class Dfs_TopSortStrategy implements TopSortStrategy_Interface {
   protected topSort(
     graph: DirectedGraph,
     vertex: number,
-    visited: boolean[],
     order: number[],
     currentIndex: number,
+    permenant_visited: boolean[],
+    temporary_visited: boolean[] = Array.from(
+      { length: graph.size() },
+      () => false,
+    ),
   ): number {
+    if (temporary_visited[vertex]) {
+      throw Error('Graph has cycle');
+    }
+
+    temporary_visited[vertex] = true;
+
     for (const neighbor of graph.neighbors(vertex)) {
-      if (visited[neighbor]) continue;
-      visited[neighbor] = true;
+      if (permenant_visited[neighbor]) continue;
 
       currentIndex = this.topSort(
         graph,
         neighbor,
-        visited,
         order,
         currentIndex,
+        permenant_visited,
+        temporary_visited,
       );
     }
 
+    permenant_visited[vertex] = true;
     order[currentIndex] = vertex;
 
     return currentIndex - 1;
