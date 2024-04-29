@@ -1,5 +1,5 @@
 import { Graph } from '@root/data-structures';
-import { topSort } from './top-sort';
+import { topSort } from '../top-sort';
 
 /**
  * Compute the shortest distance from
