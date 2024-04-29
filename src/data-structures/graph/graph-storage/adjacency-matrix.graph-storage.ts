@@ -1,9 +1,9 @@
 import { GraphStorage_Interface } from './graph-storage.interface';
 
 export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
-  private vertices: number;
+  protected vertices: number;
 
-  private adjacencyMatrix: Array<Array<number>>;
+  protected adjacencyMatrix: Array<Array<number>>;
 
   constructor(size?: number) {
     this.vertices = size ?? 0;

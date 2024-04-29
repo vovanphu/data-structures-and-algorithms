@@ -2,8 +2,8 @@
  * @deprecated
  */
 export class BinaryHeap<T = number> {
-  private heap: T[] = [];
-  private compare: Function;
+  protected heap: T[] = [];
+  protected compare: Function;
 
   constructor();
 
@@ -30,31 +30,31 @@ export class BinaryHeap<T = number> {
     }
   }
 
-  private parentIndex(index: number): number {
+  protected parentIndex(index: number): number {
     return Math.floor((index - 1) / 2);
   }
 
-  private leftIndex(index: number): number {
+  protected leftIndex(index: number): number {
     return index * 2 + 1;
   }
 
-  private rightIndex(index: number): number {
+  protected rightIndex(index: number): number {
     return index * 2 + 2;
   }
 
-  private isLessThan(a: T, b: T): boolean {
+  protected isLessThan(a: T, b: T): boolean {
     if (!a || !b) return false;
     return this.compare(a, b) > 0;
   }
 
-  private swap(source: number, destination: number) {
+  protected swap(source: number, destination: number) {
     [this.heap[source], this.heap[destination]] = [
       this.heap[destination],
       this.heap[source],
     ];
   }
 
-  private swimUp(index: number): number {
+  protected swimUp(index: number): number {
     const parentIndex = this.parentIndex(index);
     if (parentIndex < 0) return index;
     const value = this.heap[index];
@@ -65,7 +65,7 @@ export class BinaryHeap<T = number> {
     return this.swimUp(parentIndex);
   }
 
-  private sinkDown(index: number): number {
+  protected sinkDown(index: number): number {
     const leftIndex = this.leftIndex(index);
     const rightIndex = this.rightIndex(index);
     if (leftIndex >= this.size()) return index;

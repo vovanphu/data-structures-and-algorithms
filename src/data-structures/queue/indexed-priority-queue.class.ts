@@ -4,9 +4,9 @@ export class IndexedPriorityQueue<
   V extends any = any,
   T extends [V, number] = [V, number],
 > {
-  private heap: BinaryHeap<T>;
-  private hash: Map<V, number> = new Map();
-  private compare = (a: T, b: T) => b[1] - a[1];
+  protected heap: BinaryHeap<T>;
+  protected hash: Map<V, number> = new Map();
+  protected compare = (a: T, b: T) => b[1] - a[1];
 
   constructor() {
     this.heap = new BinaryHeap<T>(this.compare);

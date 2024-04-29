@@ -40,7 +40,7 @@ export class Dfs_TopSortStrategy implements TopSortStrategy_Interface {
    * @param currentIndex
    * @returns new value of the currentIndex
    */
-  private topSort(
+  protected topSort(
     graph: DirectedGraph,
     vertex: number,
     visited: boolean[],

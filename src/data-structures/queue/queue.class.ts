@@ -1,9 +1,9 @@
 import { SingleNode } from '../linked-list/single-node.class';
 
 export class Queue<T> {
-  private head: SingleNode<T> | null = null;
-  private tail: SingleNode<T> | null = null;
-  private count: number = 0;
+  protected head: SingleNode<T> | null = null;
+  protected tail: SingleNode<T> | null = null;
+  protected count: number = 0;
 
   enqueue(item: T): void {
     const node = new SingleNode<T>(item);

@@ -14,7 +14,7 @@ export class Recursive_BfsStrategy implements BfsStrategy_Interface {
     this._bfs(graph, callback, queue, visited);
   }
 
-  private _bfs(
+  protected _bfs(
     graph: Graph,
     callback: Function,
     queue: Queue<number>,

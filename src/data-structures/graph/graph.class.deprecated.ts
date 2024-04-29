@@ -65,7 +65,7 @@ export class Graph {
     this._bfsRecursive(callback, [startingVertex]);
   }
 
-  private _bfsRecursive(
+  protected _bfsRecursive(
     callback: Function = console.log,
     queue: number[] = [],
     visited: boolean[] = new Array(this.vertices).fill(false),

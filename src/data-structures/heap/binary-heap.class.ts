@@ -10,13 +10,13 @@
  */
 
 export class BinaryHeap<T = number> {
-  private heap: T[] = [];
+  protected heap: T[] = [];
 
-  private lessThanCompare: Function;
+  protected lessThanCompare: Function;
 
-  private defaultLessThanCompare: Function = (a: any, b: any) => b - a;
+  protected defaultLessThanCompare: Function = (a: any, b: any) => b - a;
 
-  private defaultEqualCompare: Function = (a: any, b: any) => a === b;
+  protected defaultEqualCompare: Function = (a: any, b: any) => a === b;
 
   // Support difference constructors
 
@@ -50,7 +50,7 @@ export class BinaryHeap<T = number> {
    * @param index
    * @returns
    */
-  private parentIndex(index: number): number {
+  protected parentIndex(index: number): number {
     return Math.floor((index - 1) / 2);
   }
 
@@ -59,7 +59,7 @@ export class BinaryHeap<T = number> {
    * @param index
    * @returns
    */
-  private leftIndex(index: number): number {
+  protected leftIndex(index: number): number {
     return 2 * index + 1;
   }
 
@@ -68,7 +68,7 @@ export class BinaryHeap<T = number> {
    * @param index
    * @returns
    */
-  private rightIndex(index: number): number {
+  protected rightIndex(index: number): number {
     return 2 * index + 2;
   }
 
@@ -78,7 +78,7 @@ export class BinaryHeap<T = number> {
    * @param b
    * @returns
    */
-  private isLessThan(a: T, b: T): boolean {
+  protected isLessThan(a: T, b: T): boolean {
     if (a === undefined || b === undefined) {
       throw new Error('Invalid inputs');
     }
@@ -91,7 +91,7 @@ export class BinaryHeap<T = number> {
    * @param source
    * @param destination
    */
-  private swap(source: number, destination: number): void {
+  protected swap(source: number, destination: number): void {
     [this.heap[source], this.heap[destination]] = [
       this.heap[destination],
       this.heap[source],
@@ -105,7 +105,7 @@ export class BinaryHeap<T = number> {
    * @param index
    * @returns
    */
-  private swimUp(index: number): number {
+  protected swimUp(index: number): number {
     const parentIndex = this.parentIndex(index);
 
     // Parent index is less than 0 mean we are at the root
@@ -129,7 +129,7 @@ export class BinaryHeap<T = number> {
    * need until it valid
    * @param index
    */
-  private sinkDown(index: number): number {
+  protected sinkDown(index: number): number {
     const leftIndex = this.leftIndex(index);
     const rightIndex = this.rightIndex(index);
 

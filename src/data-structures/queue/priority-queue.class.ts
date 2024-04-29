@@ -4,8 +4,8 @@ export class PriorityQueue<
   V extends any = any,
   T extends [V, number] = [V, number],
 > {
-  private heap: BinaryHeap<T>;
-  private compare = (a: T, b: T) => b[1] - a[1];
+  protected heap: BinaryHeap<T>;
+  protected compare = (a: T, b: T) => b[1] - a[1];
 
   constructor() {
     this.heap = new BinaryHeap<T>(this.compare);

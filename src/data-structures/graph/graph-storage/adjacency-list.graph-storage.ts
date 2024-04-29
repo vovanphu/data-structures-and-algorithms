@@ -1,9 +1,9 @@
 import { GraphStorage_Interface } from './graph-storage.interface';
 
 export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
-  private vertices: number;
+  protected vertices: number;
 
-  private adjacencyList: Map<number, Map<number, number>>;
+  protected adjacencyList: Map<number, Map<number, number>>;
 
   constructor(size?: number) {
     this.vertices = size ?? 0;

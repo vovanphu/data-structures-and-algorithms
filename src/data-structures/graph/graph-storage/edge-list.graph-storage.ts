@@ -4,7 +4,7 @@ export class Edge {
   static DEFAULT_WEIGHT = 1;
   public source: number;
   public destination: number;
-  private _weight: number = Edge.DEFAULT_WEIGHT;
+  protected _weight: number = Edge.DEFAULT_WEIGHT;
 
   constructor(source: number, destination: number, weight?: number) {
     this.source = source;
@@ -22,8 +22,8 @@ export class Edge {
 }
 
 export class EdgeList_GraphStorage implements GraphStorage_Interface {
-  private vertices: number;
-  private edges: Array<Edge>;
+  protected vertices: number;
+  protected edges: Array<Edge>;
 
   constructor(size?: number) {
     this.vertices = 0;

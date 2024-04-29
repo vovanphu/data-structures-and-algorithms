@@ -1,6 +1,6 @@
 export class WeightedGraph {
-  private vertices: number;
-  private adjacencyList: Map<number, Map<number, number>>;
+  protected vertices: number;
+  protected adjacencyList: Map<number, Map<number, number>>;
 
   constructor(vertices: number) {
     this.vertices = vertices;
