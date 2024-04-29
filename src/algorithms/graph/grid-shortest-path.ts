@@ -19,6 +19,14 @@ export function gridShortestPath(
     throw new Error('Out of grid bound');
   }
 
+  if (grid[startingRow][startingColumn] === 'e') {
+    return [[startingRow, startingColumn]];
+  }
+
+  if (grid[startingRow][startingColumn] === 'x') {
+    throw new Error('Invalid start location');
+  }
+
   // Variables used for counting
   let count = 0;
   let stepsInCurrentLayer = 0;
