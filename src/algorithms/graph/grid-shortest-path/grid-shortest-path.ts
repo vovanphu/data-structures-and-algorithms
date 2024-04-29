@@ -46,7 +46,7 @@ export function gridShortestPath(
   // Variables used for tracking path
   let isFound: boolean = false;
   let current: number[] = [-1, -1];
-  const parents: number[][][] = new Array(R)
+  const prev: number[][][] = new Array(R)
     .fill(undefined)
     .map(() => new Array(C).fill(undefined));
 
@@ -88,7 +88,7 @@ export function gridShortestPath(
       qr.enqueue(rr);
       qc.enqueue(cc);
       visited[rr][cc] = true;
-      parents[rr][cc] = current;
+      prev[rr][cc] = current;
       stepsInNextLayer++; // Count steps in a layer
     }
 
@@ -106,7 +106,7 @@ export function gridShortestPath(
 
     while (current !== undefined) {
       reversed.push(current);
-      current = parents[current[0]][current[1]];
+      current = prev[current[0]][current[1]];
     }
 
     return reversed.reverse();

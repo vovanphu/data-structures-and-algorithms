@@ -35,7 +35,7 @@ export function dagShortestPath(
 
   // Variables for result
   const dist: number[] = Array.from({ length: graph.size() }, () => Infinity);
-  const parents: number[] = Array.from({ length: graph.size() });
+  const prev: number[] = Array.from({ length: graph.size() });
 
   // Variables for traversal
   const topOrder = topSort(graph);
@@ -57,10 +57,10 @@ export function dagShortestPath(
       const weight = graph.get(vertex, neighbor);
       if (dist[vertex] + weight < dist[neighbor]) {
         dist[neighbor] = dist[vertex] + weight;
-        parents[neighbor] = vertex;
+        prev[neighbor] = vertex;
       }
     }
   }
 
-  return parents;
+  return prev;
 }
