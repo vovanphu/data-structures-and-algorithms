@@ -1,4 +1,4 @@
-import { WeightedGraph } from './weighted-graph.class';
+import { WeightedGraph } from './weighted-graph.class.deprecated';
 import { IndexedPriorityQueue } from './src/data-structures/queue/indexed-priority-queue.class';
 
 export function dijkstra(graph: WeightedGraph, startIndex: number): number[] {

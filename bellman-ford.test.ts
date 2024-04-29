@@ -1,5 +1,5 @@
 import { bellmanFord } from './bellman-ford';
-import { WeightedGraph } from './weighted-graph.class';
+import { WeightedGraph } from './weighted-graph.class.deprecated';
 
 describe('Bellman-Ford Algorithm', () => {
   test('Shortest path from start node to other nodes', () => {

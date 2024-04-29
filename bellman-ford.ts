@@ -1,4 +1,4 @@
-import { WeightedGraph } from './weighted-graph.class';
+import { WeightedGraph } from './weighted-graph.class.deprecated';
 
 export function bellmanFord(
   graph: WeightedGraph,

@@ -1,4 +1,4 @@
-import { WeightedGraph } from './weighted-graph.class';
+import { WeightedGraph } from './weighted-graph.class.deprecated';
 import { dijkstra } from './dijkstra';
 
 describe('Dijkstra Algorithm', () => {

@@ -1,4 +1,4 @@
-import { WeightedGraph } from './weighted-graph.class';
+import { WeightedGraph } from './weighted-graph.class.deprecated';
 
 describe('Weighted Graph', () => {
   it('should add edges with weights', () => {
