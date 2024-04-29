@@ -4,7 +4,7 @@ export function gridShortestPath(
   grid: string[][],
   startingRow: number = 0,
   startingColumn: number = 0,
-): number[][] | undefined {
+): number[][] {
   // Grid sizes
   const R = grid.length;
   const C = R === 0 ? 0 : grid[0].length;
@@ -112,5 +112,5 @@ export function gridShortestPath(
     return reversed.reverse();
   }
 
-  return undefined;
+  return [];
 }

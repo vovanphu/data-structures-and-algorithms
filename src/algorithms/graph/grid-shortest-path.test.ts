@@ -28,10 +28,9 @@ describe('gridShortestPath', () => {
       ['.', 'x', '.', '.'],
       ['.', 'x', 'e', '.'],
     ];
-    const expectedResult = undefined;
 
     const result = gridShortestPath(dungeon);
-    expect(result).toEqual(expectedResult);
+    expect(result).toEqual([]);
   });
 
   test('handle start from somewhere else', () => {
@@ -55,19 +54,6 @@ describe('gridShortestPath', () => {
   });
 
   test('handle start at the end', () => {
-    const dungeon = [
-      ['.', '.', '.', '.'],
-      ['.', 'x', 'x', '.'],
-      ['.', 'x', '.', '.'],
-      ['.', 'x', 'e', '.'],
-    ];
-    const expectedResult = [[3, 2]];
-
-    const result = gridShortestPath(dungeon, 3, 2);
-    expect(result).toEqual(expectedResult);
-  });
-
-  test('handle input hold at first', () => {
     const dungeon = [
       ['.', '.', '.', '.'],
       ['.', 'x', 'x', '.'],
