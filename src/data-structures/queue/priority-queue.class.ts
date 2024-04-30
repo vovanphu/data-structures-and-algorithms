@@ -5,10 +5,10 @@ export class PriorityQueue<
   T extends [V, number] = [V, number],
 > {
   protected heap: BinaryHeap<T>;
-  protected compare = (a: T, b: T) => b[1] - a[1];
+  protected comparator = (a: T, b: T) => a[1] - b[1];
 
   constructor() {
-    this.heap = new BinaryHeap<T>(this.compare);
+    this.heap = new BinaryHeap<T>(this.comparator);
   }
 
   size(): number {
