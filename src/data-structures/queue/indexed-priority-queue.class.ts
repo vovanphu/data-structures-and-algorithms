@@ -1,5 +1,10 @@
 import { BinaryHeap } from '../heap/binary-heap.deprecated.class';
 
+/**
+ * Notice: Indexed Priority Queue doesn't allow duplicate values
+ * since it use these values as unique identifiers
+ * to find item index in a hash table
+ */
 export class IndexedPriorityQueue<
   V extends any = any,
   T extends [V, number] = [V, number],
