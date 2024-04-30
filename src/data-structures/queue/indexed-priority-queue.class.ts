@@ -1,4 +1,4 @@
-import { BinaryHeap } from '../heap/binary-heap.deprecated.class';
+import { BinaryHeap } from '../heap/binary-heap.class';
 
 /**
  * Notice: Indexed Priority Queue doesn't allow duplicate values
@@ -36,7 +36,7 @@ export class IndexedPriorityQueue<
   enqueue(value: V, priority: number) {
     const index = this.findIndex(value);
     if (index > -1) {
-      const newIndex = this.heap.updateAt(index, [value, priority] as T);
+      const newIndex = this.heap.updateAtIndex(index, [value, priority] as T);
       this.hash.set(value, newIndex);
     } else {
       const newIndex = this.heap.insert([value, priority] as T);

@@ -12,11 +12,11 @@
 export class BinaryHeap<T = number> {
   protected heap: T[] = [];
 
-  protected lessThanCompare: Function;
+  protected comparator: Function;
 
-  protected defaultLessThanCompare: Function = (a: any, b: any) => b - a;
+  protected defaultComparator: Function = (a: any, b: any) => a - b;
 
-  protected defaultEqualCompare: Function = (a: any, b: any) => a === b;
+  protected defaultEqualComparator: Function = (a: any, b: any) => a === b;
 
   // Support difference constructors
 
@@ -29,16 +29,16 @@ export class BinaryHeap<T = number> {
   constructor(values: T[], compare: Function);
 
   // Implementation of constructure
-  constructor(valuesOrCompare?: T[] | Function, compare?: Function) {
-    if (compare === undefined) {
-      compare = this.defaultLessThanCompare;
+  constructor(valuesOrCompare?: T[] | Function, comparator?: Function) {
+    if (comparator === undefined) {
+      comparator = this.defaultComparator;
     }
 
     if (typeof valuesOrCompare === 'function') {
-      compare = valuesOrCompare;
+      comparator = valuesOrCompare;
     }
 
-    this.lessThanCompare = compare;
+    this.comparator = comparator;
 
     if (Array.isArray(valuesOrCompare)) {
       this.heapify(valuesOrCompare);
@@ -73,17 +73,15 @@ export class BinaryHeap<T = number> {
   }
 
   /**
-   * Return true if a is less than b
+   * Return a negative if a < b, 0 if a === b
    * @param a
    * @param b
    * @returns
    */
-  protected isLessThan(a: T, b: T): boolean {
-    if (a === undefined || b === undefined) {
-      throw new Error('Invalid inputs');
-    }
-
-    return this.lessThanCompare(a, b) > 0;
+  protected compare(a: T, b: T): number {
+    if (a === undefined) return 1;
+    if (b === undefined) return -1;
+    return this.comparator(a, b);
   }
 
   /**
@@ -118,7 +116,7 @@ export class BinaryHeap<T = number> {
     // Less than parent's value means invalid so
     // it need to be swaped with the parent and
     // continue swim up
-    if (!this.isLessThan(value, parentValue)) return index;
+    if (this.compare(parentValue, value) <= 0) return index;
     this.swap(index, parentIndex);
     return this.swimUp(parentIndex);
   }
@@ -143,16 +141,16 @@ export class BinaryHeap<T = number> {
       rightIndex < this.size() ? this.heap[rightIndex] : undefined;
 
     // Check to know if we are working with left branch
-    if (rightValue === undefined || this.isLessThan(leftValue, rightValue)) {
+    if (rightValue === undefined || this.compare(leftValue, rightValue) <= 0) {
       // Compare current value with left child value to see
       // whenever it valid or not
-      if (this.isLessThan(value, leftValue)) return index;
+      if (this.compare(value, leftValue) <= 0) return index;
       this.swap(index, leftIndex);
       return this.sinkDown(leftIndex);
     }
 
     // Or we are working with right branch
-    if (this.isLessThan(value, rightValue)) return index;
+    if (this.compare(value, rightValue) <= 0) return index;
     this.swap(index, rightIndex);
     return this.sinkDown(rightIndex);
   }
@@ -215,7 +213,7 @@ export class BinaryHeap<T = number> {
    * @param compare
    * @returns
    */
-  findIndex(value: T, compare: Function = this.defaultEqualCompare): number {
+  findIndex(value: T, compare: Function = this.defaultEqualComparator): number {
     for (let i = 0; i < this.size(); i++) {
       if (compare(value, this.heap[i])) {
         return i;
@@ -229,6 +227,8 @@ export class BinaryHeap<T = number> {
    * @param index
    */
   removeAtIndex(index: number): void {
+    if (index < -1 || index > this.heap.length) return;
+
     // First swap the given item with the last item
     this.swap(index, this.size() - 1);
 
@@ -247,8 +247,33 @@ export class BinaryHeap<T = number> {
    * @param value
    * @param compare
    */
-  remove(value: T, compare: Function = this.defaultEqualCompare): void {
+  remove(value: T, compare: Function = this.defaultEqualComparator): void {
     this.removeAtIndex(this.findIndex(value, compare));
+  }
+
+  updateAtIndex(index: number, value: T): number {
+    if (index < -1 || index > this.heap.length) return -1;
+
+    this.heap[index] = value;
+
+    // Rebalance the heap from the input index
+    // swim up and then sink down
+    let newIndex = this.swimUp(index);
+    newIndex = this.sinkDown(index);
+
+    return newIndex;
+  }
+
+  update(
+    value: T,
+    newValue: T,
+    compare: Function = this.defaultEqualComparator,
+  ): number {
+    return this.updateAtIndex(this.findIndex(value, compare), newValue);
+  }
+
+  valueAt(index: number): T | undefined {
+    return this.heap[index];
   }
 
   /**

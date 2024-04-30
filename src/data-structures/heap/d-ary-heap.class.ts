@@ -15,9 +15,9 @@ export class DAryHeap<T = number> {
 
   protected heap: T[] = [];
 
-  protected lessThanCompare: Function;
+  protected comparator: Function;
 
-  protected defaultLessThanCompare: Function = (a: any, b: any) => b - a;
+  protected defaultComparator: Function = (a: any, b: any) => a - b;
 
   protected defaultEqualCompare: Function = (a: any, b: any) => a === b;
 
@@ -32,18 +32,22 @@ export class DAryHeap<T = number> {
   constructor(d: number, values: T[], compare: Function);
 
   // Implementation of constructure
-  constructor(d: number, valuesOrCompare?: T[] | Function, compare?: Function) {
+  constructor(
+    d: number,
+    valuesOrCompare?: T[] | Function,
+    comparator?: Function,
+  ) {
     this.d = d;
 
-    if (compare === undefined) {
-      compare = this.defaultLessThanCompare;
+    if (comparator === undefined) {
+      comparator = this.defaultComparator;
     }
 
     if (typeof valuesOrCompare === 'function') {
-      compare = valuesOrCompare;
+      comparator = valuesOrCompare;
     }
 
-    this.lessThanCompare = compare;
+    this.comparator = comparator;
 
     if (Array.isArray(valuesOrCompare)) {
       this.heapify(valuesOrCompare);
@@ -78,17 +82,15 @@ export class DAryHeap<T = number> {
   }
 
   /**
-   * Return true if a is less than b
+   * Return a negative if a < b, 0 if a === b
    * @param a
    * @param b
    * @returns
    */
-  protected isLessThan(a: T, b: T): boolean {
-    if (a === undefined || b === undefined) {
-      throw new Error('Invalid inputs');
-    }
-
-    return this.lessThanCompare(a, b) > 0;
+  protected compare(a: T, b: T): number {
+    if (a === undefined) return 1;
+    if (b === undefined) return -1;
+    return this.comparator(a, b);
   }
 
   /**
@@ -122,7 +124,7 @@ export class DAryHeap<T = number> {
     // Less than parent's value means invalid so
     // it need to be swaped with the parent and
     // continue swim up
-    if (!this.isLessThan(value, parentValue)) return index;
+    if (this.compare(parentValue, value) <= 0) return index;
 
     this.swap(index, parentIndex);
     return this.swimUp(parentIndex);
@@ -143,18 +145,18 @@ export class DAryHeap<T = number> {
     // Retrieve the childs's min value index
     const minValueChildIndex = childIndices.reduce(
       (minValueIndex, currentIndex) => {
-        return this.isLessThan(
-          this.heap[currentIndex],
+        return this.compare(
           this.heap[minValueIndex],
-        )
-          ? currentIndex
-          : minValueIndex;
+          this.heap[currentIndex],
+        ) <= 0
+          ? minValueIndex
+          : currentIndex;
       },
       childIndices[0],
     );
 
     // Stop process if this position is valid
-    if (this.isLessThan(this.heap[index], this.heap[minValueChildIndex])) {
+    if (this.compare(this.heap[index], this.heap[minValueChildIndex]) <= 0) {
       return index;
     }
 
@@ -235,6 +237,8 @@ export class DAryHeap<T = number> {
    * @param index
    */
   removeAtIndex(index: number): void {
+    if (index < -1 || index > this.heap.length) return;
+
     // First swap the given item with the last item
     this.swap(index, this.size() - 1);
 
@@ -246,6 +250,31 @@ export class DAryHeap<T = number> {
     // swim up and then sink down
     this.swimUp(index);
     this.sinkDown(index);
+  }
+
+  updateAtIndex(index: number, value: T): number {
+    if (index < -1 || index > this.heap.length) return -1;
+
+    this.heap[index] = value;
+
+    // Rebalance the heap from the input index
+    // swim up and then sink down
+    let newIndex = this.swimUp(index);
+    newIndex = this.sinkDown(index);
+
+    return newIndex;
+  }
+
+  update(
+    value: T,
+    newValue: T,
+    compare: Function = this.defaultEqualCompare,
+  ): number {
+    return this.updateAtIndex(this.findIndex(value, compare), newValue);
+  }
+
+  valueAt(index: number): T | undefined {
+    return this.heap[index];
   }
 
   /**
