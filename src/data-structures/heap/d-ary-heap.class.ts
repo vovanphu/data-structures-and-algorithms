@@ -19,7 +19,7 @@ export class DAryHeap<T = number> {
 
   protected defaultComparator: Function = (a: any, b: any) => a - b;
 
-  protected defaultEqualCompare: Function = (a: any, b: any) => a === b;
+  protected defaultEqualComparator: Function = (a: any, b: any) => a === b;
 
   // Support difference constructors
 
@@ -73,6 +73,7 @@ export class DAryHeap<T = number> {
 
     for (let i = 1; i <= this.d; i++) {
       const childIndex = this.d * index + i;
+
       if (childIndex < this.size()) {
         indices.push(childIndex);
       }
@@ -120,13 +121,12 @@ export class DAryHeap<T = number> {
     const value = this.heap[index];
     const parentValue = this.heap[parentIndex];
 
-    // Compare current value with parent's value
-    // Less than parent's value means invalid so
-    // it need to be swaped with the parent and
-    // continue swim up
+    // Compare the parent value with current value
+    // make sure parent value <= current value
+    // if not, it need to be swaped and continue swim up
     if (this.compare(parentValue, value) <= 0) return index;
 
-    this.swap(index, parentIndex);
+    this.swap(parentIndex, index);
     return this.swimUp(parentIndex);
   }
 
@@ -223,7 +223,7 @@ export class DAryHeap<T = number> {
    * @param compare
    * @returns
    */
-  findIndex(value: T, compare: Function = this.defaultEqualCompare): number {
+  findIndex(value: T, compare: Function = this.defaultEqualComparator): number {
     for (let i = 0; i < this.size(); i++) {
       if (compare(value, this.heap[i])) {
         return i;
@@ -237,7 +237,7 @@ export class DAryHeap<T = number> {
    * @param index
    */
   removeAtIndex(index: number): void {
-    if (index < -1 || index > this.heap.length) return;
+    if (index < -1 || index >= this.heap.length) return;
 
     // First swap the given item with the last item
     this.swap(index, this.size() - 1);
@@ -252,8 +252,12 @@ export class DAryHeap<T = number> {
     this.sinkDown(index);
   }
 
+  /**
+   * Update the item of given index out of the heap
+   * @param index
+   */
   updateAtIndex(index: number, value: T): number {
-    if (index < -1 || index > this.heap.length) return -1;
+    if (index < -1 || index >= this.heap.length) return -1;
 
     this.heap[index] = value;
 
@@ -268,7 +272,7 @@ export class DAryHeap<T = number> {
   update(
     value: T,
     newValue: T,
-    compare: Function = this.defaultEqualCompare,
+    compare: Function = this.defaultEqualComparator,
   ): number {
     return this.updateAtIndex(this.findIndex(value, compare), newValue);
   }
@@ -282,7 +286,7 @@ export class DAryHeap<T = number> {
    * @param value
    * @param compare
    */
-  remove(value: T, compare: Function = this.defaultEqualCompare): void {
+  remove(value: T, compare: Function = this.defaultEqualComparator): void {
     this.removeAtIndex(this.findIndex(value, compare));
   }
 

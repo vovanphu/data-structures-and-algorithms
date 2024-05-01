@@ -227,7 +227,7 @@ export class BinaryHeap<T = number> {
    * @param index
    */
   removeAtIndex(index: number): void {
-    if (index < -1 || index > this.heap.length) return;
+    if (index < -1 || index >= this.heap.length) return;
 
     // First swap the given item with the last item
     this.swap(index, this.size() - 1);
@@ -252,7 +252,7 @@ export class BinaryHeap<T = number> {
   }
 
   updateAtIndex(index: number, value: T): number {
-    if (index < -1 || index > this.heap.length) return -1;
+    if (index < -1 || index >= this.heap.length) return -1;
 
     this.heap[index] = value;
 
