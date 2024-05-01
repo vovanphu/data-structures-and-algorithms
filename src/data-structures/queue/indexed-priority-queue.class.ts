@@ -191,7 +191,7 @@ export class IndexedPriorityQueue<
   }
 
   /**
-   * Update the item of given index out of the heap
+   * Update the item of the given index
    * @param index
    */
   updateAtIndex(index: number, value: T): number {
@@ -210,16 +210,32 @@ export class IndexedPriorityQueue<
     return newIndex;
   }
 
+  /**
+   * Update priority of the given key
+   * @param key
+   * @param priority
+   * @returns
+   */
   update(key: V, priority: number): number {
     return this.updateAtIndex(this.findIndex(key), [key, priority] as T);
   }
 
-  get(key: V): number | undefined {
+  /**
+   * Get the priority of the given key
+   * @param key
+   * @returns
+   */
+  priority(key: V): number | undefined {
     let index = this.findIndex(key);
     if (index < 0) return undefined;
     return this.heap[index][1];
   }
 
+  /**
+   * Return true if the key has in the queue
+   * @param key
+   * @returns
+   */
   has(key: V): boolean {
     return this.pHash.has(key);
   }
@@ -234,6 +250,13 @@ export class IndexedPriorityQueue<
     return this.heap[0];
   }
 
+  /**
+   * Add item with given key and priority to the queue
+   * will update exist item if find duplicated key
+   * @param key
+   * @param priority
+   * @returns
+   */
   enqueue(key: V, priority: number): number {
     const index = this.findIndex(key);
 
@@ -247,6 +270,10 @@ export class IndexedPriorityQueue<
     return this.swimUp(this.size() - 1);
   }
 
+  /**
+   * Get the top item out and remove it from the queue
+   * @returns
+   */
   dequeue(): T | undefined {
     if (this.size() === 0) return undefined;
 
