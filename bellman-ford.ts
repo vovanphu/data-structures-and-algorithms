@@ -1,9 +1,6 @@
-import { WeightedGraph } from './src/data-structures/graph/weighted-graph.class.deprecated';
+import { Graph } from '@root/data-structures';
 
-export function bellmanFord(
-  graph: WeightedGraph,
-  startIndex: number,
-): number[] {
+export function bellmanFord(graph: Graph, startIndex: number): number[] {
   const dist: number[] = new Array(graph.size()).fill(Infinity);
   if (startIndex >= graph.size()) return dist;
   dist[startIndex] = 0;
@@ -11,7 +8,7 @@ export function bellmanFord(
     for (let vertex = 0; vertex < graph.size(); vertex++) {
       for (const neighbor of graph.neighbors(vertex)) {
         const oldDist = dist[neighbor];
-        const newDist = dist[vertex] + graph.weight(vertex, neighbor);
+        const newDist = dist[vertex] + graph.get(vertex, neighbor);
         dist[neighbor] = Math.min(oldDist, newDist);
       }
     }
@@ -19,7 +16,7 @@ export function bellmanFord(
   for (let vertex = 0; vertex < graph.size(); vertex++) {
     for (const neighbor of graph.neighbors(vertex)) {
       const oldDist = dist[neighbor];
-      const newDist = dist[vertex] + graph.weight(vertex, neighbor);
+      const newDist = dist[vertex] + graph.get(vertex, neighbor);
       if (newDist < oldDist) {
         dist[neighbor] = -Infinity;
       }

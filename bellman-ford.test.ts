@@ -1,15 +1,15 @@
 import { bellmanFord } from './bellman-ford';
-import { WeightedGraph } from './src/data-structures/graph/weighted-graph.class.deprecated';
+import { Graph } from '@root/data-structures';
 
 describe('Bellman-Ford Algorithm', () => {
   test('Shortest path from start node to other nodes', () => {
-    const graph = new WeightedGraph(5);
-    graph.addEdge(0, 1, 2);
-    graph.addEdge(0, 2, 4);
-    graph.addEdge(1, 2, 1);
-    graph.addEdge(1, 3, 7);
-    graph.addEdge(2, 4, 3);
-    graph.addEdge(3, 4, 1);
+    const graph = new Graph();
+    graph.set(0, 1, 2);
+    graph.set(0, 2, 4);
+    graph.set(1, 2, 1);
+    graph.set(1, 3, 7);
+    graph.set(2, 4, 3);
+    graph.set(3, 4, 1);
 
     // Calculate shortest paths from node 0
     const shortestPaths = bellmanFord(graph, 0);
@@ -19,11 +19,11 @@ describe('Bellman-Ford Algorithm', () => {
   });
 
   test('Graph with negative cycle', () => {
-    const graph = new WeightedGraph(4);
-    graph.addEdge(0, 1, 2);
-    graph.addEdge(1, 2, 3);
-    graph.addEdge(2, 3, -7);
-    graph.addEdge(3, 0, 1);
+    const graph = new Graph();
+    graph.set(0, 1, 2);
+    graph.set(1, 2, 3);
+    graph.set(2, 3, -7);
+    graph.set(3, 0, 1);
 
     // Calculate shortest paths from node 0
     const shortestPaths = bellmanFord(graph, 0);
@@ -33,7 +33,8 @@ describe('Bellman-Ford Algorithm', () => {
   });
 
   test('Start index out of bounds', () => {
-    const graph = new WeightedGraph(5);
+    const graph = new Graph();
+    graph.set(4);
 
     // Try to calculate shortest path with start index out of bounds
     const shortestPaths = bellmanFord(graph, 10);
