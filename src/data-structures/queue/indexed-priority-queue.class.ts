@@ -291,4 +291,40 @@ export class IndexedPriorityQueue<
 
     return value;
   }
+
+  /**
+   * This method decrease an existing key by update it priority
+   * if new priority is smaller than the old one
+   * for convinient it will insert new key and priority if
+   * this key didn't exist yet
+   * @param key
+   * @param priority
+   */
+  decreaseKey(key: V, priority: number): number {
+    const oldPriority = this.priority(key);
+
+    if (oldPriority === undefined || priority < oldPriority) {
+      return this.enqueue(key, priority);
+    }
+
+    return -1;
+  }
+
+  /**
+   * This method increase an existing key by update it priority
+   * if new priority is bigger than the old one
+   * for convinient it will insert new key and priority if
+   * this key didn't exist yet
+   * @param key
+   * @param priority
+   */
+  increaseKey(key: V, priority: number): number {
+    const oldPriority = this.priority(key);
+
+    if (oldPriority === undefined || priority > oldPriority) {
+      return this.enqueue(key, priority);
+    }
+
+    return -1;
+  }
 }

@@ -69,4 +69,30 @@ describe('IndexedPriorityQueue', () => {
     expect(queue.peek()).toBeUndefined();
     expect(queue.dequeue()).toBeUndefined();
   });
+
+  it('should decrease key properly', () => {
+    const queue = new IndexedPriorityQueue<string>();
+
+    queue.decreaseKey('A', 5);
+    expect(queue.priority('A')).toEqual(5);
+
+    queue.decreaseKey('A', 6);
+    expect(queue.priority('A')).toEqual(5);
+
+    queue.decreaseKey('A', 4);
+    expect(queue.priority('A')).toEqual(4);
+  });
+
+  it('should increase key properly', () => {
+    const queue = new IndexedPriorityQueue<string>();
+
+    queue.increaseKey('A', 3);
+    expect(queue.priority('A')).toEqual(3);
+
+    queue.increaseKey('A', 2);
+    expect(queue.priority('A')).toEqual(3);
+
+    queue.increaseKey('A', 4);
+    expect(queue.priority('A')).toEqual(4);
+  });
 });
