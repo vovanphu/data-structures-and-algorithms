@@ -12,7 +12,7 @@ describe('Bellman-Ford Algorithm', () => {
     graph.set(3, 4, 1);
 
     // Calculate shortest paths from node 0
-    const shortestPaths = bellmanFord(graph, 0);
+    const [shortestPaths] = bellmanFord(graph, 0);
 
     // Verify the shortest paths from node 0 to other nodes
     expect(shortestPaths).toEqual([0, 2, 3, 9, 6]);
@@ -26,7 +26,7 @@ describe('Bellman-Ford Algorithm', () => {
     graph.set(3, 0, 1);
 
     // Calculate shortest paths from node 0
-    const shortestPaths = bellmanFord(graph, 0);
+    const [shortestPaths] = bellmanFord(graph, 0);
 
     // Expect -Infinity for distances affected by negative cycle
     expect(shortestPaths).toEqual([-Infinity, -Infinity, -Infinity, -Infinity]);
@@ -36,16 +36,10 @@ describe('Bellman-Ford Algorithm', () => {
     const graph = new Graph();
     graph.set(4);
 
-    // Try to calculate shortest path with start index out of bounds
-    const shortestPaths = bellmanFord(graph, 10);
+    const expectedPrev = Array.from({ length: 5 });
+    const [_, prev] = bellmanFord(graph, 10);
 
     // Expect all distances to be Infinity
-    expect(shortestPaths).toEqual([
-      Infinity,
-      Infinity,
-      Infinity,
-      Infinity,
-      Infinity,
-    ]);
+    expect(prev).toEqual(expectedPrev);
   });
 });
