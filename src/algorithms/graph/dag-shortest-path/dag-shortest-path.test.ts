@@ -11,16 +11,15 @@ describe('DAG Shortest Path', () => {
       [3, 4, 1],
     ]);
     const startVertex = 0;
-    const result = dagShortestPath(graph, startVertex);
+    const [_, result] = dagShortestPath(graph, startVertex);
     expect(result).toEqual([undefined, 0, 0, 1, 3]);
   });
 
   test('should handle an empty graph', () => {
     const graph = new Graph();
     const startVertex = 0;
-    expect(() => dagShortestPath(graph, startVertex)).toThrow(
-      'Out of graph bound',
-    );
+    const [_, result] = dagShortestPath(graph, startVertex);
+    expect(result).toEqual([]);
   });
 
   test('should handle out of graph bound', () => {
@@ -32,8 +31,9 @@ describe('DAG Shortest Path', () => {
       [3, 4, 1],
       [5],
     ]);
-    expect(() => dagShortestPath(graph, -1)).toThrow('Out of graph bound');
-    expect(() => dagShortestPath(graph, 6)).toThrow('Out of graph bound');
+    const expectedResult = Array.from({ length: 6 });
+    expect(dagShortestPath(graph, -1)[1]).toEqual(expectedResult);
+    expect(dagShortestPath(graph, 6)[1]).toEqual(expectedResult);
   });
 
   test('should handle unreachable vertices', () => {
@@ -46,14 +46,8 @@ describe('DAG Shortest Path', () => {
       [5],
     ]);
     const startVertex = 5; // Unreachable vertex
-    const result = dagShortestPath(graph, startVertex);
-    expect(result).toEqual([
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-    ]);
+    const expectedResult = Array.from({ length: 6 });
+    const [_, result] = dagShortestPath(graph, startVertex);
+    expect(result).toEqual(expectedResult);
   });
 });

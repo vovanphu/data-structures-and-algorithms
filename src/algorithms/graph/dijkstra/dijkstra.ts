@@ -1,15 +1,20 @@
 import { Graph, IndexedPriorityQueue } from '@root/data-structures';
 
-export function dijkstra(graph: Graph, startIndex: number): number[] {
+export function dijkstra(
+  graph: Graph,
+  startIndex: number,
+): [number[], number[]] {
+  // Variables used for resulting
+  const dist: number[] = new Array(graph.size()).fill(Infinity);
+  const prev: number[] = new Array(graph.size());
+
   if (startIndex < 0 || startIndex >= graph.size()) {
-    throw Error('Out of graph bound');
+    return [dist, prev];
   }
 
-  // Variables used for comparing, traversing, resulting
+  // Variables used for comparing, traversing
   const visited: boolean[] = new Array(graph.size()).fill(false);
-  const dist: number[] = new Array(graph.size()).fill(Infinity);
   const priorityQueue = new IndexedPriorityQueue<number>();
-  const prev: number[] = new Array(graph.size());
 
   // Add starting node to the queue
   dist[startIndex] = 0;
@@ -42,5 +47,5 @@ export function dijkstra(graph: Graph, startIndex: number): number[] {
     }
   }
 
-  return prev;
+  return [dist, prev];
 }

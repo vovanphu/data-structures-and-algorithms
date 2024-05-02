@@ -24,18 +24,14 @@ import { topSort } from '../top-sort';
 export function dagShortestPath(
   graph: Graph,
   startingVertex: number,
-): number[] {
-  if (!graph) {
-    throw new Error('Invalid input parameters');
-  }
-
-  if (startingVertex < 0 || startingVertex >= graph.size()) {
-    throw new Error('Out of graph bound');
-  }
-
+): [number[], number[]] {
   // Variables for result
   const dist: number[] = Array.from({ length: graph.size() }, () => Infinity);
   const prev: number[] = Array.from({ length: graph.size() });
+
+  if (startingVertex < 0 || startingVertex >= graph.size()) {
+    return [dist, prev];
+  }
 
   // Variables for traversal
   const topOrder = topSort(graph);
@@ -62,5 +58,5 @@ export function dagShortestPath(
     }
   }
 
-  return prev;
+  return [dist, prev];
 }

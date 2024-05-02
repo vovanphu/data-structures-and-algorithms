@@ -11,9 +11,7 @@ export function reconstructPath(
   start: number,
   end: number,
 ): number[] {
-  if (start < 0 || end < 0) {
-    throw new Error('Negative vertex is not supported');
-  }
+  if (start < 0 || end < 0) return [];
 
   const reversed: number[] = [];
   let currentNode: number | undefined = end;

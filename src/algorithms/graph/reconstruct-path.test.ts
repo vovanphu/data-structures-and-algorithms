@@ -1,14 +1,10 @@
 import { reconstructPath } from './reconstruct-path';
 
 describe('reconstructPath', () => {
-  test('should throw error on negative vertex', () => {
+  test('should handle negative vertex', () => {
     const prev: Array<number | undefined> = [1, 3, 2, 0, 5, 4, 8, 6, 7];
-    expect(() => reconstructPath(prev, -1, 0)).toThrowError(
-      'Negative vertex is not supported',
-    );
-    expect(() => reconstructPath(prev, 5, -2)).toThrowError(
-      'Negative vertex is not supported',
-    );
+    expect(reconstructPath(prev, -1, 0)).toEqual([]);
+    expect(reconstructPath(prev, 5, -2)).toEqual([]);
   });
 
   test('should return empty array on empty prev array', () => {

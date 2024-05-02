@@ -17,15 +17,16 @@ describe('Dijkstra Algorithm', () => {
     graph.set(4, 5, 1);
 
     // Calculate shortest path from node 0
-    const exptectedPrev = dijkstra(graph, 0);
+    const [_, prev] = dijkstra(graph, 0);
 
     // Verify the shortest paths from node 0 to other nodes
-    expect(exptectedPrev).toEqual([undefined, 2, 0, 1, 3, 4]);
+    expect(prev).toEqual([undefined, 2, 0, 1, 3, 4]);
   });
 
   test('Start index out of bounds', () => {
     const graph = new Graph();
+    const [_, prev] = dijkstra(graph, 10);
 
-    expect(() => dijkstra(graph, 10)).toThrow('Out of graph bound');
+    expect(prev).toEqual([]);
   });
 });
