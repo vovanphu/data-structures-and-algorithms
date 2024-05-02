@@ -17,8 +17,6 @@ export function dijkstra(graph: Graph, startIndex: number): number[] {
 
   while (priorityQueue.size() > 0) {
     const [vertex, distance] = priorityQueue.dequeue() as [number, number];
-
-    if (visited[vertex]) continue;
     visited[vertex] = true;
 
     // Ignore if we already find a better route
@@ -30,6 +28,8 @@ export function dijkstra(graph: Graph, startIndex: number): number[] {
     // Loop through each neighbors to relaxing the dist
     // and add more vertices to priority queue for next traversing
     for (const neighbor of graph.neighbors(vertex)) {
+      if (visited[neighbor]) continue;
+
       const weight = graph.get(vertex, neighbor);
       const oldDist = dist[neighbor];
       const newDist = dist[vertex] + weight;
