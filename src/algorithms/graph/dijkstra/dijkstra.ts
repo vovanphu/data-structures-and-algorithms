@@ -36,7 +36,7 @@ export function dijkstra(graph: Graph, startIndex: number): number[] {
 
       if (newDist < oldDist) {
         dist[neighbor] = newDist;
-        priorityQueue.enqueue(neighbor, newDist);
+        priorityQueue.decreaseKey(neighbor, newDist);
         prev[neighbor] = vertex;
       }
     }
