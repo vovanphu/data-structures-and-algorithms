@@ -4,3 +4,4 @@ export * from './grid-shortest-path';
 export * from './top-sort';
 export * from './dijkstra';
 export * from './bellman-ford';
+export * from './floyd-warshall';
