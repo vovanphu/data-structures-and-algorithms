@@ -1,5 +1,14 @@
 import { UndirectedGraph } from '@root/data-structures';
 
+/**
+ * Return an array contains bridge edges if found any.
+ * @param graph Undirected Graph
+ * @returns Array contains bridge edges
+ *
+ * Works by tracking discovery timestamp id and lowest reachable id
+ * durring dfs for each vertex, bridges appear where target lowest reachable
+ * is smaller than the current discovery timestamp id.
+ */
 export function findBridges(graph: UndirectedGraph): number[][] {
   // Variable for the result
   const bridges: number[][] = [];
