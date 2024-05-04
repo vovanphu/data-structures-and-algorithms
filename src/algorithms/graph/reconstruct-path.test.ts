@@ -17,6 +17,11 @@ describe('reconstructPath', () => {
     expect(reconstructPath(prev, 0, 3)).toEqual([0, 1, 2, 3]);
   });
 
+  test('should handle negative prev', () => {
+    const prev: Array<number | undefined> = [-1, 0, 1, 2, 3];
+    expect(reconstructPath(prev, 0, 3)).toEqual([0, 1, 2, 3]);
+  });
+
   test('should return empty array if could not reconstruct', () => {
     const prev: Array<number | undefined> = [undefined, 0, 1, 2, 3];
     expect(reconstructPath(prev, 0, 6)).toEqual([]);

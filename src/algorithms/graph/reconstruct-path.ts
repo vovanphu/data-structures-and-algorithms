@@ -16,7 +16,7 @@ export function reconstructPath(
   const reversed: number[] = [];
   let currentNode: number | undefined = end;
 
-  while (currentNode !== undefined) {
+  while (currentNode !== undefined && currentNode >= 0) {
     reversed.push(currentNode);
     if (currentNode === start) break;
     currentNode = prev[currentNode];
