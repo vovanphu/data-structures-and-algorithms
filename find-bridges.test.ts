@@ -1,14 +1,16 @@
+import { UndirectedGraph } from '@root/data-structures';
 import { findBridges } from './find-bridges';
 
 describe('findBridges', () => {
   test('Find bridges in a simple graph', () => {
     // Create a simple graph represented as an adjacency list
-    const graph = new Map<number, number[]>();
-    graph.set(0, [1, 2]);
-    graph.set(1, [0, 2]);
-    graph.set(2, [0, 1, 3]);
-    graph.set(3, [2, 4]);
-    graph.set(4, [3]);
+    const graph = new UndirectedGraph([
+      [0, 1],
+      [0, 2],
+      [1, 2],
+      [2, 3],
+      [3, 4],
+    ]);
 
     const bridges = findBridges(graph);
 
@@ -24,10 +26,11 @@ describe('findBridges', () => {
 
   test('Find bridges in a graph with no bridges', () => {
     // Create a graph with no bridges (a cycle)
-    const graph = new Map<number, number[]>();
-    graph.set(0, [1, 2]);
-    graph.set(1, [0, 2]);
-    graph.set(2, [0, 1]);
+    const graph = new UndirectedGraph([
+      [0, 1],
+      [0, 2],
+      [1, 2],
+    ]);
 
     const bridges = findBridges(graph);
 
@@ -37,12 +40,15 @@ describe('findBridges', () => {
 
   test('Find bridges in a graph with a single bridge', () => {
     // Create a graph with a single bridge
-    const graph = new Map<number, number[]>();
-    graph.set(0, [1, 2]);
-    graph.set(1, [0, 2]);
-    graph.set(2, [0, 1, 3]);
-    graph.set(3, [2]);
-    graph.set(4, [3]);
+    const graph = new UndirectedGraph([
+      [0, 1],
+      [0, 2],
+      [1, 2],
+      [2, 3],
+      [3, 4],
+      [3, 5],
+      [4, 5],
+    ]);
 
     const bridges = findBridges(graph);
 
