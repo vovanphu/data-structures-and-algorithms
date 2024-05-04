@@ -6,8 +6,10 @@ export function findBridges(graph: UndirectedGraph): number[][] {
 
   // Variables for tracking
   let id = 0;
-  const ids: number[] = Array.from({ length: graph.size() }); // Timestamp ids record discovery time
-  const lows: number[] = Array.from({ length: graph.size() }); // The lowest links of vertices in the graph
+  // Timestamp ids record discovery time
+  const ids: number[] = Array.from({ length: graph.size() });
+  // The lowest links of vertices in the graph
+  const lows: number[] = Array.from({ length: graph.size() });
 
   // Variable for traversing
   const visited: boolean[] = Array.from({ length: graph.size() }, () => false);
