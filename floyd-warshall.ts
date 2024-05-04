@@ -1,36 +1,49 @@
+import { Graph } from '@root/data-structures';
+
 export function floydWarshall(
-  graph: number[][],
-  next: number[][] = [],
-): number[][] {
-  const dp: number[][] = Array(graph.length)
-    .fill(null)
-    .map(() => Array(graph.length).fill(Infinity));
-  for (let i = 0; i < graph.length; i++) {
-    for (let j = 0; j < graph.length; j++) {
-      if (!next[i]) next[i] = Array(graph.length);
-      next[i][j] = j;
-      dp[i][j] = graph[i][j];
-    }
-  }
-  for (let k = 0; k < graph.length; k++) {
-    for (let i = 0; i < graph.length; i++) {
-      for (let j = 0; j < graph.length; j++) {
-        if (dp[i][k] + dp[k][j] < dp[i][j]) {
-          next[i][j] = next[i][k];
-          dp[i][j] = dp[i][k] + dp[k][j];
+  graph: Graph,
+): [Array<Array<number>>, Array<Array<number | undefined>>] {
+  // Dynamic programming table
+  const tabular: Array<Array<number>> = Array.from(
+    { length: graph.size() },
+    (_, i) => Array.from({ length: graph.size() }, (_, j) => graph.get(i, j)),
+  );
+
+  // Prevs for shortest path
+  const prevs: Array<Array<number | undefined>> = Array.from(
+    { length: graph.size() },
+    (_, i) =>
+      Array.from({ length: graph.size() }, (_, j) =>
+        graph.get(i, j) === Infinity ? undefined : i,
+      ),
+  );
+
+  // Iterations to improve estimate in tabular
+  for (let k = 0; k < graph.size(); k++) {
+    for (let i = 0; i < graph.size(); i++) {
+      for (let j = 0; j < graph.size(); j++) {
+        const oldDist = tabular[i][j];
+        const newDist = tabular[i][k] + tabular[k][j];
+        if (newDist < oldDist) {
+          tabular[i][j] = newDist;
+          prevs[i][j] = prevs[i][k];
         }
       }
     }
   }
-  for (let k = 0; k < graph.length; k++) {
-    for (let i = 0; i < graph.length; i++) {
-      for (let j = 0; j < graph.length; j++) {
-        if (dp[i][k] + dp[k][j] < dp[i][j]) {
-          next[i][j] = -1;
-          dp[i][j] = -Infinity;
+
+  // Detect negative cycles
+  for (let k = 0; k < graph.size(); k++) {
+    for (let i = 0; i < graph.size(); i++) {
+      for (let j = 0; j < graph.size(); j++) {
+        const oldDist = tabular[i][j];
+        const newDist = tabular[i][k] + tabular[k][j];
+        if (newDist < oldDist) {
+          tabular[i][j] = -Infinity;
         }
       }
     }
   }
-  return dp;
+
+  return [tabular, prevs];
 }
