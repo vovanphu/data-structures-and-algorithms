@@ -40,6 +40,7 @@ export function floydWarshall(
         const newDist = tabular[i][k] + tabular[k][j];
         if (newDist < oldDist) {
           tabular[i][j] = -Infinity;
+          prevs[i][j] = -1;
         }
       }
     }
