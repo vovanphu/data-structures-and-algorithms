@@ -39,6 +39,9 @@ export function floydWarshall(
       for (let j = 0; j < graph.size(); j++) {
         const oldDist = tabular[i][j];
         const newDist = tabular[i][k] + tabular[k][j];
+
+        // Compare to check if adding k to intermediate set can
+        // produce a shorter path or not
         if (newDist < oldDist) {
           tabular[i][j] = newDist;
           prevs[i][j] = prevs[k][j];
@@ -47,12 +50,16 @@ export function floydWarshall(
     }
   }
 
-  // Detect negative cycles
+  // Detect negative cycles by repeating the algorithm again
   for (let k = 0; k < graph.size(); k++) {
     for (let i = 0; i < graph.size(); i++) {
       for (let j = 0; j < graph.size(); j++) {
         const oldDist = tabular[i][j];
         const newDist = tabular[i][k] + tabular[k][j];
+
+        // The algorithm are invoked once, if we still can optimize
+        // the distance at this point then this vertex directly or
+        // in-directly affected by negative cycles
         if (newDist < oldDist) {
           tabular[i][j] = -Infinity;
           prevs[i][j] = -1;
