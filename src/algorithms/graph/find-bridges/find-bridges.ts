@@ -17,6 +17,8 @@ export function findBridges(graph: UndirectedGraph): number[][] {
   // from while collecting low-link from a visited vertex
   // (which is a neighbor, means reachable and has a timestamp id)
   const dfs = (startingVertex: number, parentVertex?: number | undefined) => {
+    if (visited[startingVertex]) return;
+
     visited[startingVertex] = true;
     ids[startingVertex] = lows[startingVertex] = id++;
 
@@ -45,6 +47,8 @@ export function findBridges(graph: UndirectedGraph): number[][] {
     }
   };
 
+  // Loop through every vertices to make sure connected components
+  // are proccessed properly
   for (let i = 0; i < graph.size(); i++) {
     dfs(i);
   }
