@@ -34,7 +34,6 @@ export function bellmanFord(
 
       if (newDist < oldDist) {
         dist[neighbor] = -Infinity;
-        prev[neighbor] = vertex;
       }
     }
   }
