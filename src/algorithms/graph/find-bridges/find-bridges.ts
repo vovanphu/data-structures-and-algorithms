@@ -37,8 +37,8 @@ export function findBridges(graph: UndirectedGraph): number[][] {
       // Ignore the vertex we come from
       if (neighbor === parentVertex) continue;
 
-      // Reach a visited vertex, means we can compare
-      // this vertex low-link with that vertex timestamp id
+      // Reach a visited vertex, this reachable vertex has a chance
+      // to have a smaller discovery time id than current low-link index
       if (visited[neighbor] === true) {
         lows[startingVertex] = Math.min(lows[startingVertex], ids[neighbor]);
       } else {
