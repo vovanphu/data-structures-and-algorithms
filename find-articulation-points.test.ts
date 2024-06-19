@@ -1,3 +1,4 @@
+import { UndirectedGraph } from '@root/data-structures';
 import { findArticulationPoints } from './find-articulation-points';
 
 describe('findArticulationPoints', () => {
@@ -7,12 +8,13 @@ describe('findArticulationPoints', () => {
     //     |   |
     //     3---4
 
-    const graph = new Map<number, number[]>();
-    graph.set(0, [1]);
-    graph.set(1, [0, 2, 3]);
-    graph.set(2, [1, 4]);
-    graph.set(3, [1, 4]);
-    graph.set(4, [2, 3]);
+    const graph = new UndirectedGraph([
+      [0, 1],
+      [1, 2],
+      [1, 3],
+      [2, 4],
+      [3, 4],
+    ]);
 
     const articulationPoints = findArticulationPoints(graph);
     expect(articulationPoints).toEqual([false, true, false, false, false]);
@@ -28,16 +30,18 @@ describe('findArticulationPoints', () => {
     //         |
     //         4
 
-    const graph = new Map<number, number[]>();
-    graph.set(0, [1, 2]);
-    graph.set(1, [0, 2]);
-    graph.set(2, [0, 1, 3, 5]);
-    graph.set(3, [2, 4]);
-    graph.set(4, [3]);
-    graph.set(5, [2, 6, 8]);
-    graph.set(6, [5, 7]);
-    graph.set(7, [6, 8]);
-    graph.set(8, [5, 7]);
+    const graph = new UndirectedGraph([
+      [0, 1],
+      [0, 2],
+      [1, 2],
+      [2, 3],
+      [2, 5],
+      [3, 4],
+      [5, 6],
+      [5, 8],
+      [6, 7],
+      [7, 8],
+    ]);
 
     const articulationPoints = findArticulationPoints(graph);
     expect(articulationPoints).toEqual([
@@ -59,13 +63,14 @@ describe('findArticulationPoints', () => {
     //         |   |
     //         4---5
 
-    const graph = new Map<number, number[]>();
-    graph.set(0, [1]);
-    graph.set(1, [0, 2]);
-    graph.set(2, [1, 3, 4]);
-    graph.set(3, [2, 5]);
-    graph.set(4, [2, 5]);
-    graph.set(5, [3, 4]);
+    const graph = new UndirectedGraph([
+      [0, 1],
+      [1, 2],
+      [2, 3],
+      [2, 4],
+      [3, 5],
+      [4, 5],
+    ]);
 
     const articulationPoints = findArticulationPoints(graph);
     expect(articulationPoints).toEqual([
@@ -84,10 +89,11 @@ describe('findArticulationPoints', () => {
     //   \ |
     //     2
 
-    const graph = new Map<number, number[]>();
-    graph.set(0, [1, 2]);
-    graph.set(1, [0, 2]);
-    graph.set(2, [0, 1]);
+    const graph = new UndirectedGraph([
+      [0, 1],
+      [0, 2],
+      [1, 2],
+    ]);
 
     const articulationPoints = findArticulationPoints(graph);
     expect(articulationPoints).toEqual([false, false, false]);
@@ -101,12 +107,14 @@ describe('findArticulationPoints', () => {
     // |/ \|
     // 1   4
 
-    const graph = new Map<number, number[]>();
-    graph.set(0, [1, 2]);
-    graph.set(1, [0, 2]);
-    graph.set(2, [0, 1, 3, 4]);
-    graph.set(3, [2, 4]);
-    graph.set(4, [2, 3]);
+    const graph = new UndirectedGraph([
+      [0, 1],
+      [0, 2],
+      [1, 2],
+      [2, 3],
+      [2, 4],
+      [3, 4],
+    ]);
 
     const articulationPoints = findArticulationPoints(graph);
     expect(articulationPoints).toEqual([false, false, true, false, false]);
