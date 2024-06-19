@@ -43,15 +43,6 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
       throw new Error('Negative vertex is not allowed');
     }
 
-    const existEdgeIndex = this.edges.findIndex(
-      (edge) => edge.source === vertex && edge.destination === vertex,
-    );
-
-    if (existEdgeIndex < 0) {
-      const newEdge = new Edge(vertex, vertex, 0);
-      this.edges.push(newEdge);
-    }
-
     this.vertices = Math.max(this.vertices, vertex + 1);
   }
 
@@ -59,9 +50,6 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
     if (source < 0 || destination < 0) {
       throw new Error('Negative vertex is not allowed');
     }
-
-    this.setVertex(source);
-    this.setVertex(destination);
 
     const existEdgeIndex = this.edges.findIndex(
       (edge) => edge.source === source && edge.destination === destination,

@@ -21,7 +21,6 @@ export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
 
     if (!this.adjacencyList.has(vertex)) {
       this.adjacencyList.set(vertex, new Map<number, number>());
-      this.adjacencyList.get(vertex)?.set(vertex, 0);
     }
 
     this.vertices = Math.max(this.vertices, vertex + 1);
@@ -34,12 +33,6 @@ export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
 
     if (!this.adjacencyList.has(source)) {
       this.adjacencyList.set(source, new Map<number, number>());
-      this.adjacencyList.get(source)?.set(source, 0);
-    }
-
-    if (!this.adjacencyList.has(destination)) {
-      this.adjacencyList.set(destination, new Map<number, number>());
-      this.adjacencyList.get(destination)?.set(destination, 0);
     }
 
     weight = (weight ?? 1) as number;

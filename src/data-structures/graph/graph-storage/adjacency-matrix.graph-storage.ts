@@ -31,7 +31,6 @@ export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
           }
         } else {
           this.adjacencyMatrix[i] = new Array(vertex + 1).fill(Infinity);
-          this.adjacencyMatrix[i][i] = 0;
         }
       }
 
