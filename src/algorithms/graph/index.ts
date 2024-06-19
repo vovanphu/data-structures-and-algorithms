@@ -6,3 +6,4 @@ export * from './dijkstra';
 export * from './bellman-ford';
 export * from './floyd-warshall';
 export * from './find-bridges';
+export * from './find-articulation-points';
