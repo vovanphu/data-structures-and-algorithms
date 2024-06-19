@@ -58,6 +58,12 @@ export class AdjacencyMatrix_GraphStorage implements GraphStorage_Interface {
       throw new Error('Out of graph bound');
     }
 
+    if (this.adjacencyMatrix[source][destination] === Infinity) {
+      // Weight from a vertex to itself is 0 by default
+      if (source === destination) return 0;
+      return Infinity;
+    }
+
     return this.adjacencyMatrix[source][destination];
   }
 

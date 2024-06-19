@@ -48,7 +48,12 @@ export class AdjacencyList_GraphStorage implements GraphStorage_Interface {
       throw new Error('Out of graph bound');
     }
 
-    if (!this.adjacencyList.get(source)?.has(destination)) return Infinity;
+    if (!this.adjacencyList.get(source)?.has(destination)) {
+      // Weight from a vertex to itself is 0 by default
+      if (source === destination) return 0;
+      return Infinity;
+    }
+
     return this.adjacencyList.get(source)?.get(destination) as number;
   }
 

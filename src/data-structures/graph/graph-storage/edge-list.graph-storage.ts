@@ -76,7 +76,12 @@ export class EdgeList_GraphStorage implements GraphStorage_Interface {
       (edge) => edge.source === source && edge.destination === destination,
     );
 
-    if (existEdge === undefined) return Infinity;
+    if (existEdge === undefined) {
+      // Weight from a vertex to itself is 0 by default
+      if (source === destination) return 0;
+      return Infinity;
+    }
+
     return existEdge.weight as number;
   }
 
