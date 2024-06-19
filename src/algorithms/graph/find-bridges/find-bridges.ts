@@ -27,32 +27,32 @@ export function findBridges(graph: UndirectedGraph): number[][] {
   // The `parent` variable help us ignore the vertex we come
   // from while collecting low-link from a visited vertex
   // (which is a neighbor, means reachable and has a timestamp id)
-  const dfs = (startingVertex: number, parentVertex?: number | undefined) => {
-    if (visited[startingVertex]) return;
+  const dfs = (vertex: number, parent?: number | undefined) => {
+    if (visited[vertex]) return;
 
-    visited[startingVertex] = true;
-    ids[startingVertex] = lows[startingVertex] = id++;
+    visited[vertex] = true;
+    ids[vertex] = lows[vertex] = id++;
 
-    for (const neighbor of graph.neighbors(startingVertex)) {
+    for (const neighbor of graph.neighbors(vertex)) {
       // Ignore the vertex we come from
-      if (neighbor === parentVertex) continue;
+      if (neighbor === parent) continue;
 
       // Reach a visited vertex, this reachable vertex has a chance
       // to have a smaller discovery time id than current low-link index
       if (visited[neighbor] === true) {
-        lows[startingVertex] = Math.min(lows[startingVertex], ids[neighbor]);
+        lows[vertex] = Math.min(lows[vertex], ids[neighbor]);
       } else {
         // Continue perform dfs on unvisited vertices
-        dfs(neighbor, startingVertex);
+        dfs(neighbor, vertex);
 
         // After dfs, compare and update current vertex low-link with neighbor
-        lows[startingVertex] = Math.min(lows[startingVertex], lows[neighbor]);
+        lows[vertex] = Math.min(lows[vertex], lows[neighbor]);
 
         // At this point, we can compare current id with neighbor low-link
         // to detect if this edge is a bridge
         // (since neighbor low-link was already updated durring its dfs)
-        if (ids[startingVertex] < lows[neighbor]) {
-          bridges.push([startingVertex, neighbor]);
+        if (ids[vertex] < lows[neighbor]) {
+          bridges.push([vertex, neighbor]);
         }
       }
     }
