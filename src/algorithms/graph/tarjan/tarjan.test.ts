@@ -1,5 +1,5 @@
 import { DirectedGraph } from '@root/data-structures';
-import { tarjanAlgorithm } from './tarjan-algorithm';
+import { tarjan } from './tarjan';
 
 describe('Tarjan Algorithm', () => {
   test('Finding Strongly Connected Components in a graph', () => {
@@ -16,7 +16,7 @@ describe('Tarjan Algorithm', () => {
     graph.set(6, 7);
     graph.set(7, 6);
 
-    const sccCount = tarjanAlgorithm(graph);
+    const sccCount = tarjan(graph);
     expect(sccCount.length).toBe(3);
   });
 
@@ -28,7 +28,7 @@ describe('Tarjan Algorithm', () => {
     graph.set(3, 4);
     graph.set(4, 0);
 
-    const sccCount = tarjanAlgorithm(graph);
+    const sccCount = tarjan(graph);
     expect(sccCount.length).toBe(1);
   });
 
@@ -49,7 +49,7 @@ describe('Tarjan Algorithm', () => {
       [7, 6],
     ]);
 
-    const sccCount = tarjanAlgorithm(graph);
+    const sccCount = tarjan(graph);
     expect(sccCount.length).toBe(3);
   });
 
@@ -61,7 +61,7 @@ describe('Tarjan Algorithm', () => {
     graph.set(3, 4);
     graph.set(4, 5);
 
-    const sccCount = tarjanAlgorithm(graph);
+    const sccCount = tarjan(graph);
     expect(sccCount.length).toBe(4);
   });
 });

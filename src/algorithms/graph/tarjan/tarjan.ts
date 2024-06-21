@@ -8,7 +8,7 @@ import { DirectedGraph } from '@root/data-structures';
  * @param graph
  * @returns
  */
-export function tarjanAlgorithm(graph: DirectedGraph): number[][] {
+export function tarjan(graph: DirectedGraph): number[][] {
   // Variable for traversal
   const visited: boolean[] = Array.from({ length: graph.size() }, () => false);
 
