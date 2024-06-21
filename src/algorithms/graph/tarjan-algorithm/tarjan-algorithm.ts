@@ -5,9 +5,6 @@ import { DirectedGraph } from '@root/data-structures';
  * in a directed graph
  * If `v` and `u` belong to the same strongly connected component,
  * there always a path from `v` to `u` and vice versa
- *
- * An excellent explaination on this algorithm:
- * https://codeforces.com/blog/entry/71146
  * @param graph
  * @returns
  */
