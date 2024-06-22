@@ -1,3 +1,4 @@
+import { Graph } from '@root/data-structures';
 /**
  * The algorithm solve Traveling Salesman Problem by
  * return The Hamiltonian cycle for `graph` input.
@@ -8,7 +9,7 @@
  * https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm
  */
 
-export function heldKarp(graph: number[][], start: number = 0): number[] {
+export function heldKarp(graph: Graph, start: number = 0): number[] {
   /**
    * Variable which contains the route,
    * the route is gonna constructed in reversed order
@@ -28,9 +29,9 @@ export function heldKarp(graph: number[][], start: number = 0): number[] {
    *
    * As default, use `Infinity` as the shorest distance since we didn't know any shortest path yet.
    */
-  const tabular: number[][] = Array(1 << graph.length)
+  const tabular: number[][] = Array(1 << graph.size())
     .fill(null)
-    .map(() => Array(graph.length).fill(Infinity));
+    .map(() => Array(graph.size()).fill(Infinity));
 
   /**
    * Generate base cases, includes all path goes from `start` to `end`
@@ -39,9 +40,9 @@ export function heldKarp(graph: number[][], start: number = 0): number[] {
    * `(1 << start) | (1 << end)` i a bitwise statement return a binary number denote that the set is {start, end}.
    * The shortest distance is the direct distance from vertex `start` to `end` (`graph[start][end]`)
    */
-  for (let end = 0; end < graph.length; end++) {
+  for (let end = 0; end < graph.size(); end++) {
     if (end === start) continue;
-    tabular[(1 << start) | (1 << end)][end] = graph[start][end];
+    tabular[(1 << start) | (1 << end)][end] = graph.get(start, end);
   }
 
   /**
@@ -51,19 +52,19 @@ export function heldKarp(graph: number[][], start: number = 0): number[] {
    *
    * `tabular[set][end] = min(tabular[set - {end}][k] + graph[k][end]) with k in set`
    */
-  for (let set = 0; set < 1 << graph.length; set++) {
+  for (let set = 0; set < 1 << graph.size(); set++) {
     if ((set & (1 << start)) === 0) continue; // `start` must be in `set`
 
-    for (let end = 0; end < graph.length; end++) {
+    for (let end = 0; end < graph.size(); end++) {
       if ((set & (1 << end)) === 0 || end === start) continue; // `end` differents to `start` and must be in `set`
 
-      for (let k = 0; k < graph.length; k++) {
+      for (let k = 0; k < graph.size(); k++) {
         // `k` differents to `start`, `end` and must be in `set`
         if ((set & (1 << k)) === 0 || k === end || k === start) continue;
 
         const prevSubset = set ^ (1 << end); // `prevSubset` is the `set - {end}`
         const prevDistance = tabular[prevSubset][k]; // Minimum cost from `start`, through `prevSubset - {start, k}`, to `k`
-        const distance = prevDistance + graph[k][end]; // Distance base on prev distance
+        const distance = prevDistance + graph.get(k, end); // Distance base on prev distance
 
         /**
          * Compare the minimum distance in tabular with new distance just calculated
@@ -83,26 +84,26 @@ export function heldKarp(graph: number[][], start: number = 0): number[] {
    * Loop through every vertex `end` in `V` (graph.size()),
    * use the `tabular` computed ealier to find the minimum cost of the shortest Hamiltonian cycle.
    *
-   * `(1 << graph.length) - 1` is a binary statement returns a binary number denote a set `set`
+   * `(1 << graph.size()) - 1` is a binary statement returns a binary number denote a set `set`
    * includes all vertices from `V`
    */
-  for (let end = 0; end < graph.length; end++) {
+  for (let end = 0; end < graph.size(); end++) {
     if (end === start) continue;
 
     const currDistance =
-      tabular[(1 << graph.length) - 1][end] + graph[end][start];
+      tabular[(1 << graph.size()) - 1][end] + graph.get(end, start);
 
     minDistance = Math.min(currDistance, minDistance);
   }
 
   let lastIndex = start; // A pointer used for construct the route
-  let subset = (1 << graph.length) - 1; // Binary number denote `set` includes all vertices
+  let subset = (1 << graph.size()) - 1; // Binary number denote `set` includes all vertices
   route.push(start); // The route begin with vertex `start`
 
   /**
    * Re-construct the Hamiltonian cycle using the `tabular` table calculated before.
    */
-  for (let end = 0; end < graph.length; end++) {
+  for (let end = 0; end < graph.size(); end++) {
     if (end === start) continue;
 
     /**
@@ -113,14 +114,14 @@ export function heldKarp(graph: number[][], start: number = 0): number[] {
     /**
      * Find the previous vertex in the optimal path
      */
-    for (let k = 0; k < graph.length; k++) {
+    for (let k = 0; k < graph.size(); k++) {
       // `k` differents to `start`, `end` and must be in `set`
       if (k === start || k === end || (subset & (1 << k)) === 0) continue;
       if (index === -1) index = k;
 
       // distance calculations based on the dynamic programming table and the graph's adjacency matrix
-      const prevDist = tabular[subset][index] + graph[index][lastIndex];
-      const newDist = tabular[subset][k] + graph[k][lastIndex];
+      const prevDist = tabular[subset][index] + graph.get(index, lastIndex);
+      const newDist = tabular[subset][k] + graph.get(k, lastIndex);
 
       if (newDist < prevDist) {
         index = k;
