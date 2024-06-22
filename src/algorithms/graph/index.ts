@@ -8,3 +8,4 @@ export * from './floyd-warshall';
 export * from './find-bridges';
 export * from './find-articulation-points';
 export * from './tarjan';
+export * from './held-karp';

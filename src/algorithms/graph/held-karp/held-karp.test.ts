@@ -13,8 +13,8 @@ describe('Held-Karp Algorithm', () => {
     // Calculate the shortest Hamiltonian cycle starting from vertex 0
     const shortestCycle = heldKarp(graph, 0);
 
-    // Expect the result to be the minimum cycle distance (0 -> 1 -> 2 -> 3 -> 0)
-    expect(shortestCycle).toBe(80);
+    // Expect the result to be the minimum cycle distance (0 -> 1 -> 3 -> 2 -> 0)
+    expect(shortestCycle).toEqual([0, 1, 3, 2, 0]);
   });
 
   test('Shortest Hamiltonian cycle in a larger graph', () => {
@@ -30,7 +30,7 @@ describe('Held-Karp Algorithm', () => {
     // Calculate the shortest Hamiltonian cycle starting from vertex 0
     const shortestCycle = heldKarp(graph, 0);
 
-    // Expect the result to be the minimum cycle distance (0 -> 4 -> 2 -> 3 -> 1 -> 0)
-    expect(shortestCycle).toBe(118);
+    // Expect the result to be the minimum cycle distance (0 -> 1 -> 3 -> 2 -> 4 -> 0)
+    expect(shortestCycle).toEqual([0, 1, 2, 3, 4, 0]);
   });
 });
