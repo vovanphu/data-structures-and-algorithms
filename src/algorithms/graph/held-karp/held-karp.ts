@@ -103,8 +103,8 @@ export function heldKarp(graph: Graph, start: number = 0): number[] {
   /**
    * Re-construct the Hamiltonian cycle using the `tabular` table calculated before.
    */
-  for (let end = 0; end < graph.size(); end++) {
-    if (end === start) continue;
+  for (let i = 0; i < graph.size(); i++) {
+    if (i === start) continue;
 
     /**
      * Variable used for decide which is the prev vertex in the optimal path
@@ -114,17 +114,17 @@ export function heldKarp(graph: Graph, start: number = 0): number[] {
     /**
      * Find the previous vertex in the optimal path
      */
-    for (let k = 0; k < graph.size(); k++) {
+    for (let end = 0; end < graph.size(); end++) {
       // `k` differents to `start`, `end` and must be in `set`
-      if (k === start || k === end || (subset & (1 << k)) === 0) continue;
-      if (index === -1) index = k;
+      if (end === start || (subset & (1 << end)) === 0) continue;
+      if (index === -1) index = end;
 
       // distance calculations based on the dynamic programming table and the graph's adjacency matrix
-      const prevDist = tabular[subset][index] + graph.get(index, lastIndex);
-      const newDist = tabular[subset][k] + graph.get(k, lastIndex);
+      const oldDist = tabular[subset][index] + graph.get(index, lastIndex);
+      const newDist = tabular[subset][end] + graph.get(end, lastIndex);
 
-      if (newDist < prevDist) {
-        index = k;
+      if (newDist < oldDist) {
+        index = end;
       }
     }
 
