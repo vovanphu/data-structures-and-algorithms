@@ -1,4 +1,4 @@
-import { UndirectedGraph } from '@root/data-structures';
+import { DirectedGraph, UndirectedGraph } from '@root/data-structures';
 import { heldKarp } from './held-karp';
 
 describe('Held-Karp Algorithm', () => {
@@ -16,8 +16,15 @@ describe('Held-Karp Algorithm', () => {
     // Calculate the shortest Hamiltonian cycle starting from vertex 0
     const shortestCycle = heldKarp(graph, 0);
 
-    // Expect the result to be the minimum cycle distance (0 -> 1 -> 3 -> 2 -> 0)
-    expect(shortestCycle).toEqual([0, 1, 3, 2, 0]);
+    // Expect the result to be the minimum cycle distance
+    // (0 -> 2 -> 3 -> 1 -> 0)
+    // (0 -> 1 -> 3 -> 2 -> 0)
+    const expectedResults = [
+      [0, 1, 3, 2, 0],
+      [0, 2, 3, 1, 0],
+    ];
+
+    expect(shortestCycle).toBeOneOf(expectedResults);
   });
 
   test('Shortest Hamiltonian cycle in a larger graph', () => {
@@ -38,7 +45,37 @@ describe('Held-Karp Algorithm', () => {
     // Calculate the shortest Hamiltonian cycle starting from vertex 0
     const shortestCycle = heldKarp(graph, 0);
 
-    // Expect the result to be the minimum cycle distance (0 -> 1 -> 3 -> 2 -> 4 -> 0)
-    expect(shortestCycle).toEqual([0, 1, 2, 3, 4, 0]);
+    // Expect the result to be the minimum cycle distance
+    // (0 -> 1 -> 3 -> 2 -> 4 -> 0)
+    // (0 -> 4 -> 2 -> 3 -> 1 -> 0)
+    const expectedResults = [
+      [0, 1, 3, 2, 4, 0],
+      [0, 4, 2, 3, 1, 0],
+    ];
+
+    expect(shortestCycle).toBeOneOf(expectedResults);
+  });
+
+  test('Shortest Hamiltonian cycle in a directed complete graph', () => {
+    const graph = new DirectedGraph([
+      [0, 1, 11],
+      [0, 2, 7],
+      [0, 3, 33],
+      [1, 0, 26],
+      [1, 2, 25],
+      [1, 3, 17],
+      [2, 0, 12],
+      [2, 1, 31],
+      [2, 3, 35],
+      [3, 0, 24],
+      [3, 1, 10],
+      [3, 2, 30],
+    ]);
+
+    // Calculate the shortest Hamiltonian cycle starting from vertex 0
+    const shortestCycle = heldKarp(graph);
+
+    // Expect the result to be the minimum cycle distance (0 -> 1 -> 3 -> 2 -> 0)
+    expect(shortestCycle).toEqual([0, 1, 3, 2, 0]);
   });
 });
