@@ -8,6 +8,9 @@ import { DirectedGraph } from '@root/data-structures';
  * @returns An array contains eulerian path or empty
  */
 export function findEulerianPath(graph: DirectedGraph): number[] {
+  // Base case for empty graph
+  if (graph.size() === 0) return [];
+
   /**
    * Variable to store the result
    */
@@ -53,7 +56,7 @@ export function findEulerianPath(graph: DirectedGraph): number[] {
 
     // If any vertex has out degree exceeding in degree more than 1, the graph can't have eulerian path
     // and vice versa
-    if (outMinusIn > 1 || inMinusOut) return [];
+    if (outMinusIn > 1 || inMinusOut > 1) return [];
 
     // Check if there are any potential starting points for eulerian path by out degree - in degree
     if (outMinusIn === 1) outDegreeExceedIn.push(vertex);
