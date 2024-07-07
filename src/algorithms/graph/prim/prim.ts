@@ -37,7 +37,6 @@ export function prim(graph: UndirectedGraph): number[][] {
   visited[0] = true;
 
   while (priorityQueue.size() > 0 && edges.length !== graph.size() - 1) {
-    console.log(priorityQueue.peek());
     const [key] = priorityQueue.dequeue() as any;
     const [source, destination, weight]: number[] = JSON.parse(key);
 
