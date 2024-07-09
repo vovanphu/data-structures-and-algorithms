@@ -71,6 +71,16 @@ export function fordFulkerson(
     return prev;
   };
 
+  /**
+   * Function used to calculate the maximum flow
+   * of the current augmenting path from `start` to `end` vertex
+   * represented by `prev` array
+   * @param residual
+   * @param start
+   * @param end
+   * @param prev
+   * @returns
+   */
   const calculateBottleneck = (
     residual: DirectedGraph,
     start: number,
@@ -94,6 +104,16 @@ export function fordFulkerson(
     return bottleneck;
   };
 
+  /**
+   * Function to update the bottleneck value of the current
+   * augmenting path from `start` to `end` into residual graph
+   * @param residual
+   * @param start
+   * @param end
+   * @param prev
+   * @param bottleneck
+   * @returns
+   */
   const updateResidual = (
     residual: DirectedGraph,
     start: number,
