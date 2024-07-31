@@ -27,6 +27,21 @@ describe('fordFulkerson', () => {
     expect(() => fordFulkerson(graph, 3, 0)).toThrow('Out of graph bound');
   });
 
+  test('should return the right maximum network flow of a join graph', () => {
+    const graph = new DirectedGraph([
+      [0, 1, 2],
+      [0, 2, 1],
+      [1, 2, 3],
+      [1, 4, 1],
+      [2, 4, 2],
+    ]);
+
+    const result = fordFulkerson(graph, 0, 4);
+    const expectedResult = 3;
+
+    expect(result).toBe(expectedResult);
+  });
+
   test('should return the right maximum network flow of a more complex graph', () => {
     const graph = new DirectedGraph([
       [0, 1, 7],
