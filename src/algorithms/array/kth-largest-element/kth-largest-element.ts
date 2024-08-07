@@ -1,4 +1,8 @@
 export function kthLargestElement(nums: number[], k: number): number {
+  if (k === 0) {
+    throw new Error('Invalid k');
+  }
+
   k = nums.length - k;
 
   const quickSelect = (
@@ -17,8 +21,11 @@ export function kthLargestElement(nums: number[], k: number): number {
       }
     }
 
+    [nums[p], nums[r]] = [nums[r], nums[p]];
+
     if (p > k) return quickSelect(nums, l, p - 1, k);
     if (p < k) return quickSelect(nums, p + 1, r, k);
+
     return nums[p];
   };
 
