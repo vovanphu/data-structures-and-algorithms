@@ -1,7 +1,9 @@
 import { DirectedGraph } from '@root/data-structures';
-import { fordFulkerson } from './ford-fulkerson';
+import { CapacityScaling_FordFulkersonStrategy } from './capacity-scaling.ford-fulkerson-strategy';
 
-describe('fordFulkerson', () => {
+describe('CapacityScaling_FordFulkersonStrategy', () => {
+  const strategy = new CapacityScaling_FordFulkersonStrategy();
+
   test('should return the right maximum network flow from a simple weighted directed graph', () => {
     const graph = new DirectedGraph([
       [0, 1, 10],
@@ -13,7 +15,7 @@ describe('fordFulkerson', () => {
       [3, 4, 10],
     ]);
 
-    const result = fordFulkerson(graph, 0, 4);
+    const result = strategy.execute(graph, 0, 4);
     const expectedResult = 15;
 
     expect(result).toBe(expectedResult);
@@ -22,9 +24,9 @@ describe('fordFulkerson', () => {
   test('should throw error if start and end input out of graph', () => {
     const graph = new DirectedGraph([[0, 1, 10]]);
 
-    expect(() => fordFulkerson(graph, -1, 0)).toThrow('Out of graph bound');
-    expect(() => fordFulkerson(graph, 0, 2)).toThrow('Out of graph bound');
-    expect(() => fordFulkerson(graph, 3, 0)).toThrow('Out of graph bound');
+    expect(() => strategy.execute(graph, -1, 0)).toThrow('Out of graph bound');
+    expect(() => strategy.execute(graph, 0, 2)).toThrow('Out of graph bound');
+    expect(() => strategy.execute(graph, 3, 0)).toThrow('Out of graph bound');
   });
 
   test('should return the right maximum network flow of a join graph', () => {
@@ -36,7 +38,7 @@ describe('fordFulkerson', () => {
       [2, 4, 2],
     ]);
 
-    const result = fordFulkerson(graph, 0, 4);
+    const result = strategy.execute(graph, 0, 4);
     const expectedResult = 3;
 
     expect(result).toBe(expectedResult);
@@ -64,7 +66,7 @@ describe('fordFulkerson', () => {
       [9, 10, 4],
     ]);
 
-    const result = fordFulkerson(graph, 0, 10);
+    const result = strategy.execute(graph, 0, 10);
     const expectedResult = 7;
 
     expect(result).toBe(expectedResult);
@@ -82,7 +84,7 @@ describe('fordFulkerson', () => {
       [5, 0, 3],
     ]);
 
-    const result = fordFulkerson(graph, 0, 5);
+    const result = strategy.execute(graph, 0, 5);
     const expectedResult = 0;
 
     expect(result).toBe(expectedResult);
