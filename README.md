@@ -1,4 +1,4 @@
-# 📚 Data Structures & Algorithms in TypeScript
+# Data Structures & Algorithms in TypeScript
 
 A comprehensive TypeScript library providing robust and thoroughly tested implementations of core data structures and algorithms. Designed for learning, reference, and easy integration into your projects.
 
@@ -6,7 +6,7 @@ A comprehensive TypeScript library providing robust and thoroughly tested implem
 
 ## Table of Contents
 
-- [📚 Data Structures \& Algorithms in TypeScript](#-data-structures--algorithms-in-typescript)
+- [Data Structures \& Algorithms in TypeScript](#-data-structures--algorithms-in-typescript)
   - [Table of Contents](#table-of-contents)
   - [Key Features](#key-features)
     - [Data Structures](#data-structures)
