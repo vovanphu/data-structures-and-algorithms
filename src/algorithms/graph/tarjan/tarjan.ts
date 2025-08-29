@@ -57,10 +57,10 @@ export function tarjan(graph: DirectedGraph): number[][] {
       // Continuesly pop vertices from the stack until reach the start vertex
       // gives vertices of a strongly connected component
       while (stack.length > 0) {
-        const vertext = stack.pop() as number;
-        component.push(vertext);
-        onStack.delete(vertext);
-        if (vertext === start) break;
+        const vertex = stack.pop() as number;
+        component.push(vertex);
+        onStack.delete(vertex);
+        if (vertex === start) break;
       }
 
       // Out put the strongly connected component
