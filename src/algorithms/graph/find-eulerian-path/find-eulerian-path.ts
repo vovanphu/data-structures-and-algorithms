@@ -1,5 +1,7 @@
 import { DirectedGraph } from '@root/data-structures';
 
+// [ ] TODO: Need to check if the graph is weakly connected
+
 /**
  * Function to find eulerian path of a directed graph if it exist
  * The algorithm checks if a eulerian path exits using its properties,
